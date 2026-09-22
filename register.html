@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | BTC Invest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        :root {
+            --orange: #f7931a;
+            --dark: #070b12;
+            --card: #101722;
+            --border: #202b3a;
+            --muted: #9ba7b7;
+            --green: #25d695;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top right, rgba(247,147,26,.10), transparent 35%),
+                #070b12;
+            color: white;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            background: rgba(7,11,18,.96);
+        }
+
+        .nav {
+            max-width: 1200px;
+            min-height: 75px;
+            margin: auto;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+            background: var(--orange);
+            color: #111;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .back {
+            color: #cbd3df;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back:hover {
+            color: var(--orange);
+        }
+
+        .page {
+            min-height: calc(100vh - 75px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 60px 20px;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 520px;
+
+            background: rgba(16,23,34,.96);
+
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            padding: 38px;
+
+            box-shadow: 0 25px 80px rgba(0,0,0,.35);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .btc-symbol {
+            width: 60px;
+            height: 60px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+            background: var(--orange);
+            color: #111;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 34px;
+            font-weight: bold;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+
+            color: #d7dee8;
+            font-size: 13px;
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border-radius: 9px;
+            border: 1px solid var(--border);
+
+            background: #0b111a;
+            color: white;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: var(--orange);
+            box-shadow: 0 0 0 3px rgba(247,147,26,.08);
+        }
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+
+            margin: 8px 0 22px;
+
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .terms input {
+            width: auto;
+            margin-top: 3px;
+            accent-color: var(--orange);
+        }
+
+        .terms a {
+            color: var(--orange);
+            text-decoration: none;
+        }
+
+        .submit {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 9px;
+
+            background: var(--orange);
+            color: #111;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            opacity: .9;
+        }
+
+        .login-text {
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .login-text a {
+            color: var(--orange);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .notice {
+            margin-top: 22px;
+
+            padding: 13px;
+
+            border-radius: 9px;
+
+            background: rgba(37,214,149,.06);
+            border: 1px solid rgba(37,214,149,.18);
+
+            color: var(--muted);
+
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+
+            padding: 25px 20px;
+
+            color: var(--muted);
+
+            border-top: 1px solid var(--border);
+
+            font-size: 12px;
+        }
+
+        @media (max-width: 550px) {
+
+            .register-card {
+                padding: 25px 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .title h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="nav">
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-icon">
+                ₿
+            </div>
+
+            BTC INVEST
+
+        </a>
+
+        <a href="index.html" class="back">
+            ← Back to Home
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="page">
+
+    <div class="register-card">
+
+        <div class="title">
+
+            <div class="btc-symbol">
+                ₿
+            </div>
+
+            <h1>
+                Create Your Account
+            </h1>
+
+            <p>
+                Register to access your BTC Invest account.
+            </p>
+
+        </div>
+
+
+        <form id="registerForm">
+
+            <div class="form-row">
+
+                <div class="field">
+
+                    <label for="firstName">
+                        First Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        placeholder="Enter your first name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="lastName">
+                        Last Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        placeholder="Enter your last name"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Choose a username"
+                    minlength="4"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    minlength="8"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Confirm your password"
+                    minlength="8"
+                    required
+                >
+
+            </div>
+
+
+            <div class="terms">
+
+                <input
+                    type="checkbox"
+                    id="terms"
+                    required
+                >
+
+                <label for="terms">
+
+                    I agree to the platform's
+                    <a href="#">Terms of Service</a>
+                    and
+                    <a href="#">Privacy Policy</a>.
+
+                </label>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+
+        <div class="login-text">
+
+            Already have an account?
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </div>
+
+
+        <div class="notice">
+
+            <strong>Note:</strong>
+            This registration page is currently a front-end interface.
+            Account creation will require a secure server-side backend
+            before it can process real user accounts.
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    © 2026 BTC INVEST. All rights reserved.
+
+</footer>
+
+
+<script>
+
+    const form = document.getElementById("registerForm");
+
+    form.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const password =
+            document.getElementById("password").value;
+
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+
+            alert("Passwords do not match.");
+
+            return;
+        }
+
+        alert(
+            "Registration interface is working. " +
+            "A secure backend is required to create the account."
+        );
+
+    });
+
+</script>
+
+</body>
+</html>
