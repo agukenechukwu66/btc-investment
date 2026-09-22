@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Investment Plans | BTC Invest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #070b12;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        :root {
+            --orange: #f7931a;
+            --dark: #070b12;
+            --card: #101722;
+            --muted: #9ba7b7;
+            --border: #202b3a;
+            --green: #25d695;
+        }
+
+        /* NAVIGATION */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7, 11, 18, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: auto;
+            min-height: 75px;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+            background: var(--orange);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #111;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            color: #cbd3df;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--orange);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 18px;
+            border-radius: 8px;
+
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-orange {
+            background: var(--orange);
+            color: #111;
+        }
+
+        .btn-dark {
+            background: #151e2b;
+            color: white;
+            border: 1px solid var(--border);
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+
+            padding: 90px 20px 50px;
+        }
+
+        .badge {
+            display: inline-block;
+
+            background: rgba(247, 147, 26, 0.1);
+            color: var(--orange);
+
+            border: 1px solid rgba(247, 147, 26, 0.3);
+
+            padding: 7px 14px;
+            border-radius: 20px;
+
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 span {
+            color: var(--orange);
+        }
+
+        .page-header p {
+            color: var(--muted);
+            max-width: 700px;
+            margin: auto;
+        }
+
+        /* PLANS */
+        .plans-section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px 20px 80px;
+        }
+
+        .plans {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .plan {
+            position: relative;
+
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+
+            padding: 30px;
+
+            transition: 0.25s;
+        }
+
+        .plan:hover {
+            transform: translateY(-5px);
+            border-color: rgba(247, 147, 26, 0.5);
+        }
+
+        .plan.featured {
+            border-color: var(--orange);
+        }
+
+        .popular {
+            position: absolute;
+            top: -13px;
+            right: 20px;
+
+            background: var(--orange);
+            color: #111;
+
+            padding: 5px 12px;
+            border-radius: 20px;
+
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .plan h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .duration {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        .investment {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .amount {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 2px 0 20px;
+        }
+
+        .return-box {
+            background: #0b111a;
+            border: 1px solid var(--border);
+
+            border-radius: 10px;
+            padding: 18px;
+
+            margin-bottom: 22px;
+        }
+
+        .return-label {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .return-value {
+            color: var(--green);
+            font-size: 29px;
+            font-weight: bold;
+        }
+
+        .plan ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .plan li {
+            padding: 9px 0;
+            border-bottom: 1px solid #1a2431;
+
+            color: #c6cfda;
+            font-size: 14px;
+        }
+
+        .plan li::before {
+            content: "✓";
+            color: var(--green);
+            margin-right: 9px;
+            font-weight: bold;
+        }
+
+        .plan .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* DISCLAIMER */
+        .disclaimer {
+            max-width: 850px;
+            margin: 30px auto 0;
+
+            background: rgba(247, 147, 26, 0.05);
+            border: 1px solid rgba(247, 147, 26, 0.2);
+
+            border-radius: 10px;
+            padding: 18px;
+
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* HOW IT WORKS */
+        .how {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 20px 90px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .step {
+            background: var(--card);
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+            padding: 25px;
+
+            text-align: center;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+            background: rgba(247, 147, 26, 0.1);
+
+            color: var(--orange);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .step h3 {
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 20px;
+
+            text-align: center;
+            color: var(--muted);
+        }
+
+        footer .logo {
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        footer small {
+            display: block;
+            margin-top: 10px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* MOBILE */
+        @media (max-width: 900px) {
+
+            nav {
+                display: none;
+            }
+
+            .plans {
+                grid-template-columns: 1fr;
+                max-width: 550px;
+                margin: auto;
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .page-header h1 {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .nav-buttons .btn-dark {
+                display: none;
+            }
+
+            .page-header {
+                padding-top: 60px;
+            }
+
+            .page-header h1 {
+                font-size: 34px;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .amount {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<header>
+
+    <div class="nav">
+
+        <a href="index.html" class="logo">
+            <div class="logo-icon">₿</div>
+            BTC INVEST
+        </a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="plans.html" class="active">Plans</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="nav-buttons">
+            <a href="login.html" class="btn btn-dark">Login</a>
+            <a href="register.html" class="btn btn-orange">Register</a>
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+
+    <span class="badge">BTC INVESTMENT CYCLES</span>
+
+    <h1>
+        Choose Your <span>Investment Plan</span>
+    </h1>
+
+    <p>
+        Select a Bitcoin-focused investment plan based on your preferred
+        investment amount and cycle duration.
+    </p>
+
+</section>
+
+
+<!-- INVESTMENT PLANS -->
+<section class="plans-section">
+
+    <div class="plans">
+
+        <!-- PLAN 1 -->
+        <div class="plan">
+
+            <h2>Starter</h2>
+
+            <div class="duration">
+                3-Day Investment Cycle
+            </div>
+
+            <div class="investment">
+                Investment Amount
+            </div>
+
+            <div class="amount">
+                $300
+            </div>
+
+            <div class="return-box">
+
+                <div class="return-label">
+                    Projected Value
+                </div>
+
+                <div class="return-value">
+                    $5,000
+                </div>
+
+            </div>
+
+            <ul>
+                <li>3-day cycle</li>
+                <li>Bitcoin-focused strategy</li>
+                <li>Portfolio tracking</li>
+                <li>Performance reporting</li>
+                <li>Account dashboard</li>
+            </ul>
+
+            <a href="register.html?plan=starter"
+               class="btn btn-orange">
+                Select Plan
+            </a>
+
+        </div>
+
+
+        <!-- PLAN 2 -->
+        <div class="plan featured">
+
+            <div class="popular">
+                POPULAR
+            </div>
+
+            <h2>Advanced</h2>
+
+            <div class="duration">
+                3-Day Investment Cycle
+            </div>
+
+            <div class="investment">
+                Investment Amount
+            </div>
+
+            <div class="amount">
+                $500
+            </div>
+
+            <div class="return-box">
+
+                <div class="return-label">
+                    Projected Value
+                </div>
+
+                <div class="return-value">
+                    $7,500
+                </div>
+
+            </div>
+
+            <ul>
+                <li>3-day cycle</li>
+                <li>Bitcoin-focused strategy</li>
+                <li>Portfolio monitoring</li>
+                <li>Performance reporting</li>
+                <li>Priority support</li>
+            </ul>
+
+            <a href="register.html?plan=advanced"
+               class="btn btn-orange">
+                Select Plan
+            </a>
+
+        </div>
+
+
+        <!-- PLAN 3 -->
+        <div class="plan">
+
+            <h2>Professional</h2>
+
+            <div class="duration">
+                3-Day Investment Cycle
+            </div>
+
+            <div class="investment">
+                Investment Amount
+            </div>
+
+            <div class="amount">
+                $1,000
+            </div>
+
+            <div class="return-box">
+
+                <div class="return-label">
+                    Projected Value
+                </div>
+
+                <div class="return-value">
+                    $15,000
+                </div>
+
+            </div>
+
+            <ul>
+                <li>3-day cycle</li>
+                <li>Advanced portfolio tracking</li>
+                <li>Detailed reporting</li>
+                <li>Portfolio monitoring</li>
+                <li>Priority support</li>
+            </ul>
+
+            <a href="register.html?plan=professional"
+               class="btn btn-orange">
+                Select Plan
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="disclaimer">
+
+        <strong>Important:</strong>
+        The figures displayed above are illustrative projections only.
+        They are not guaranteed returns. Bitcoin and other digital assets
+        are volatile and you may lose some or all of your investment.
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="how">
+
+    <div class="section-title">
+
+        <h2>How It Works</h2>
+
+        <p>
+            A simple process for managing your Bitcoin investment.
+        </p>
+
+    </div>
+
+
+    <div class="steps">
+
+        <div class="step">
+
+            <div class="step-number">
+                1
+            </div>
+
+            <h3>Create Account</h3>
+
+            <p>
+                Register your account and provide the required information.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                2
+            </div>
+
+            <h3>Select Plan</h3>
+
+            <p>
+                Choose the investment plan that fits your objectives.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                3
+            </div>
+
+            <h3>Fund Account</h3>
+
+            <p>
+                Fund your account using the supported payment method.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                4
+            </div>
+
+            <h3>Track Portfolio</h3>
+
+            <p>
+                Monitor your portfolio and transaction activity.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <a href="index.html" class="logo">
+
+        <div class="logo-icon">
+            ₿
+        </div>
+
+        BTC INVEST
+
+    </a>
+
+    <p>
+        © 2026 BTC INVEST. All rights reserved.
+    </p>
+
+    <small>
+        Digital asset investments involve significant risk.
+        Projected or illustrative performance does not guarantee
+        future results.
+    </small>
+
+</footer>
+
+
+</body>
+</html>
