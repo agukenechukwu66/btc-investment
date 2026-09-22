@@ -1,1227 +1,1342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bitcoin Investment Platform</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-    background:#070b12;
-    color:#fff;
-    line-height:1.6;
-}
-
-:root{
-    --orange:#f7931a;
-    --dark:#070b12;
-    --card:#101722;
-    --muted:#9ba7b7;
-    --border:#202b3a;
-    --green:#25d695;
-}
-
-header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:rgba(7,11,18,.95);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
-}
-
-.nav{
-    max-width:1200px;
-    margin:auto;
-    height:75px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 20px;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:22px;
-    font-weight:bold;
-}
-
-.logo-icon{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    background:var(--orange);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:24px;
-    font-weight:bold;
-}
-
-nav{
-    display:flex;
-    gap:25px;
-}
-
-nav a{
-    color:#cbd3df;
-    text-decoration:none;
-    font-size:14px;
-}
-
-nav a:hover{
-    color:var(--orange);
-}
-
-.nav-buttons{
-    display:flex;
-    gap:10px;
-}
-
-button,.btn{
-    border:none;
-    cursor:pointer;
-    text-decoration:none;
-    display:inline-block;
-    padding:12px 20px;
-    border-radius:8px;
-    font-weight:bold;
-}
-
-.btn-orange{
-    background:var(--orange);
-    color:#111;
-}
-
-.btn-dark{
-    background:#151e2b;
-    color:white;
-    border:1px solid var(--border);
-}
-
-.hero{
-    max-width:1200px;
-    margin:auto;
-    padding:100px 20px 80px;
-    display:grid;
-    grid-template-columns:1.1fr .9fr;
-    gap:60px;
-    align-items:center;
-}
-
-.badge{
-    display:inline-block;
-    background:rgba(247,147,26,.1);
-    color:var(--orange);
-    border:1px solid rgba(247,147,26,.3);
-    padding:7px 13px;
-    border-radius:20px;
-    font-size:13px;
-    margin-bottom:20px;
-}
-
-.hero h1{
-    font-size:58px;
-    line-height:1.08;
-    margin-bottom:22px;
-}
-
-.hero h1 span{
-    color:var(--orange);
-}
-
-.hero p{
-    color:var(--muted);
-    max-width:600px;
-    font-size:17px;
-    margin-bottom:30px;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
-}
-
-.hero-card{
-    background:linear-gradient(145deg,#121c29,#0b111a);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:30px;
-    box-shadow:0 20px 70px rgba(0,0,0,.35);
-}
-
-.btc-circle{
-    width:100px;
-    height:100px;
-    margin:0 auto 25px;
-    border-radius:50%;
-    background:var(--orange);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#111;
-    font-size:58px;
-    font-weight:bold;
-}
-
-.price{
-    text-align:center;
-    font-size:35px;
-    font-weight:bold;
-}
-
-.price-change{
-    text-align:center;
-    color:var(--green);
-    margin-top:5px;
-}
-
-.stats{
-    max-width:1200px;
-    margin:auto;
-    padding:20px;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-}
-
-.stat{
-    background:var(--card);
-    border:1px solid var(--border);
-    padding:25px;
-    border-radius:12px;
-}
-
-.stat h3{
-    color:var(--orange);
-    font-size:25px;
-}
-
-.stat p{
-    color:var(--muted);
-    font-size:13px;
-}
-
-section{
-    max-width:1200px;
-    margin:auto;
-    padding:80px 20px;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:45px;
-}
-
-.section-title h2{
-    font-size:38px;
-    margin-bottom:10px;
-}
-
-.section-title p{
-    color:var(--muted);
-}
-
-.plans{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.plan{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:30px;
-    position:relative;
-}
-
-.plan.featured{
-    border:1px solid var(--orange);
-    transform:translateY(-8px);
-}
-
-.popular{
-    position:absolute;
-    top:-13px;
-    right:20px;
-    background:var(--orange);
-    color:#111;
-    padding:5px 12px;
-    border-radius:20px;
-    font-size:11px;
-    font-weight:bold;
-}
-
-.plan h3{
-    font-size:23px;
-}
-
-.plan .duration{
-    color:var(--muted);
-    margin-bottom:25px;
-}
-
-.plan-price{
-    font-size:32px;
-    font-weight:bold;
-    margin-bottom:20px;
-}
-
-.plan ul{
-    list-style:none;
-    margin-bottom:25px;
-}
-
-.plan li{
-    padding:8px 0;
-    border-bottom:1px solid #1a2431;
-    color:#c6cfda;
-}
-
-.plan li::before{
-    content:"✓";
-    color:var(--green);
-    margin-right:8px;
-}
-
-.plan button{
-    width:100%;
-}
-
-.calculator{
-    max-width:700px;
-    margin:auto;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:30px;
-}
-
-.input-group{
-    margin-bottom:20px;
-}
-
-.input-group label{
-    display:block;
-    color:#b9c3d0;
-    margin-bottom:8px;
-}
-
-input,select{
-    width:100%;
-    background:#0b111a;
-    color:#fff;
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:14px;
-    outline:none;
-}
-
-input:focus,select:focus{
-    border-color:var(--orange);
-}
-
-.result{
-    background:#0b111a;
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:20px;
-    margin-top:20px;
-}
-
-.result-row{
-    display:flex;
-    justify-content:space-between;
-    margin:8px 0;
-}
-
-.result-row span:last-child{
-    color:var(--green);
-    font-weight:bold;
-}
-
-.steps{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-}
-
-.step{
-    text-align:center;
-    padding:25px;
-}
-
-.step-number{
-    width:55px;
-    height:55px;
-    margin:0 auto 15px;
-    border-radius:50%;
-    background:rgba(247,147,26,.12);
-    color:var(--orange);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-    font-size:20px;
-}
-
-.step p{
-    color:var(--muted);
-    font-size:14px;
-}
-
-.dashboard{
-    background:#0b111a;
-    border:1px solid var(--border);
-    border-radius:18px;
-    overflow:hidden;
-}
-
-.dashboard-top{
-    padding:25px;
-    border-bottom:1px solid var(--border);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.balance{
-    padding:30px;
-}
-
-.balance small{
-    color:var(--muted);
-}
-
-.balance h2{
-    font-size:42px;
-    margin-top:5px;
-}
-
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-    padding:0 30px 30px;
-}
-
-.dash-card{
-    background:var(--card);
-    border:1px solid var(--border);
-    padding:20px;
-    border-radius:10px;
-}
-
-.dash-card small{
-    color:var(--muted);
-}
-
-.dash-card strong{
-    display:block;
-    margin-top:7px;
-    font-size:21px;
-}
-
-.faq{
-    max-width:800px;
-    margin:auto;
-}
-
-details{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:10px;
-    margin-bottom:10px;
-    padding:18px;
-}
-
-summary{
-    cursor:pointer;
-    font-weight:bold;
-}
-
-details p{
-    color:var(--muted);
-    padding-top:12px;
-}
-
-footer{
-    border-top:1px solid var(--border);
-    padding:40px 20px;
-    text-align:center;
-    color:var(--muted);
-}
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.75);
-    z-index:2000;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-
-.modal-box{
-    width:100%;
-    max-width:430px;
-    background:#101722;
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:30px;
-    position:relative;
-}
-
-.close{
-    position:absolute;
-    right:20px;
-    top:15px;
-    font-size:25px;
-    cursor:pointer;
-    color:#aaa;
-}
-
-.modal-box h2{
-    margin-bottom:20px;
-}
-
-.modal-box button{
-    width:100%;
-    margin-top:5px;
-}
-
-.notice{
-    font-size:12px;
-    color:var(--muted);
-    margin-top:15px;
-    text-align:center;
-}
-
-@media(max-width:900px){
-    .hero{
-        grid-template-columns:1fr;
-    }
-
-    .hero h1{
-        font-size:43px;
-    }
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .plans{
-        grid-template-columns:1fr;
-    }
-
-    .plan.featured{
-        transform:none;
-    }
-
-    .steps{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    nav{
-        display:none;
-    }
-}
-
-@media(max-width:550px){
-    .stats{
-        grid-template-columns:1fr;
-    }
-
-    .steps{
-        grid-template-columns:1fr;
-    }
-
-    .dashboard-grid{
-        grid-template-columns:1fr;
-    }
-
-    .hero{
-        padding-top:65px;
-    }
-
-    .hero h1{
-        font-size:36px;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BTC Invest | Bitcoin Investment Platform</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        :root {
+            --orange: #f7931a;
+            --dark: #070b12;
+            --card: #101722;
+            --border: #202b3a;
+            --muted: #9ba7b7;
+            --green: #25d695;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--dark);
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(7, 11, 18, 0.96);
+            backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: auto;
+            min-height: 75px;
+
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: var(--orange);
+            color: #111;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #cbd3df;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: var(--orange);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 12px 20px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+            font-weight: bold;
+
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-orange {
+            background: var(--orange);
+            color: #111;
+        }
+
+        .btn-dark {
+            background: #151e2b;
+            color: white;
+
+            border: 1px solid var(--border);
+        }
+
+        /* HERO */
+
+        .hero {
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 100px 20px 80px;
+
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+
+            gap: 60px;
+
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+
+            background: rgba(247, 147, 26, 0.1);
+            color: var(--orange);
+
+            border: 1px solid rgba(247, 147, 26, 0.3);
+
+            padding: 7px 14px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 58px;
+            line-height: 1.08;
+
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: var(--orange);
+        }
+
+        .hero p {
+            color: var(--muted);
+
+            max-width: 620px;
+
+            font-size: 17px;
+
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* BTC CARD */
+
+        .hero-card {
+            background: linear-gradient(
+                145deg,
+                #121c29,
+                #0b111a
+            );
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 20px 70px rgba(0, 0, 0, 0.35);
+        }
+
+        .btc-circle {
+            width: 105px;
+            height: 105px;
+
+            margin: 0 auto 25px;
+
+            border-radius: 50%;
+
+            background: var(--orange);
+            color: #111;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 60px;
+            font-weight: bold;
+        }
+
+        .btc-price {
+            text-align: center;
+
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .btc-change {
+            text-align: center;
+
+            color: var(--green);
+
+            margin-top: 5px;
+        }
+
+        .card-line {
+            height: 1px;
+
+            background: var(--border);
+
+            margin: 25px 0;
+        }
+
+        .card-row {
+            display: flex;
+            justify-content: space-between;
+
+            margin: 10px 0;
+
+            color: #c7d0dc;
+        }
+
+        .active {
+            color: var(--green);
+        }
+
+        /* STATS */
+
+        .stats {
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 20px;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 15px;
+        }
+
+        .stat {
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            padding: 25px;
+
+            border-radius: 12px;
+        }
+
+        .stat h3 {
+            color: var(--orange);
+
+            font-size: 25px;
+        }
+
+        .stat p {
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        /* SECTIONS */
+
+        section.standard {
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 85px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+        /* FEATURE CARDS */
+
+        .features {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .feature {
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            padding: 30px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+
+            border-radius: 10px;
+
+            background: rgba(247, 147, 26, 0.1);
+
+            color: var(--orange);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 23px;
+
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+        /* PLANS PREVIEW */
+
+        .plans-preview {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .plan {
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            padding: 30px;
+        }
+
+        .plan.featured {
+            border-color: var(--orange);
+        }
+
+        .plan h3 {
+            font-size: 23px;
+        }
+
+        .plan-duration {
+            color: var(--muted);
+
+            font-size: 14px;
+
+            margin: 5px 0 20px;
+        }
+
+        .plan-amount {
+            font-size: 34px;
+
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+        .plan-return {
+            background: #0b111a;
+
+            border: 1px solid var(--border);
+
+            border-radius: 10px;
+
+            padding: 16px;
+
+            margin-bottom: 20px;
+        }
+
+        .plan-return small {
+            color: var(--muted);
+        }
+
+        .plan-return strong {
+            display: block;
+
+            color: var(--green);
+
+            font-size: 25px;
+        }
+
+        .plan ul {
+            list-style: none;
+
+            margin-bottom: 25px;
+        }
+
+        .plan li {
+            color: #c6cfda;
+
+            padding: 7px 0;
+
+            border-bottom: 1px solid #1a2431;
+
+            font-size: 14px;
+        }
+
+        .plan li::before {
+            content: "✓";
+
+            color: var(--green);
+
+            margin-right: 8px;
+        }
+
+        .plan .btn {
+            width: 100%;
+
+            text-align: center;
+        }
+
+        .view-plans {
+            text-align: center;
+
+            margin-top: 30px;
+        }
+
+        /* HOW IT WORKS */
+
+        .steps {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+        .step {
+            text-align: center;
+
+            padding: 25px;
+        }
+
+        .step-number {
+            width: 55px;
+            height: 55px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            background: rgba(247, 147, 26, 0.1);
+
+            color: var(--orange);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .step p {
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+        /* CTA */
+
+        .cta {
+            max-width: 1000px;
+
+            margin: 20px auto 90px;
+
+            padding: 60px 30px;
+
+            text-align: center;
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #111b28,
+                    #0b111a
+                );
+        }
+
+        .cta h2 {
+            font-size: 38px;
+
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: var(--muted);
+
+            max-width: 650px;
+
+            margin: 0 auto 25px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid var(--border);
+
+            padding: 40px 20px;
+
+            text-align: center;
+
+            color: var(--muted);
+        }
+
+        footer .logo {
+            justify-content: center;
+
+            margin-bottom: 15px;
+        }
+
+        footer small {
+            display: block;
+
+            max-width: 700px;
+
+            margin: 10px auto 0;
+
+            font-size: 12px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features,
+            .plans-preview {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .nav-buttons .btn-dark {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 65px;
+            }
+
+            .hero h1 {
+                font-size: 37px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 31px;
+            }
+
+            .cta h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
 </head>
+
 
 <body>
 
+
+<!-- HEADER -->
+
 <header>
-<div class="nav">
 
-    <div class="logo">
-        <div class="logo-icon">₿</div>
-        BTC INVEST
+    <div class="nav">
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-icon">
+                ₿
+            </div>
+
+            BTC INVEST
+
+        </a>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="plans.html">
+                Plans
+            </a>
+
+            <a href="#how">
+                How It Works
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#contact">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <div class="nav-buttons">
+
+            <a href="login.html" class="btn btn-dark">
+                Login
+            </a>
+
+            <a href="register.html" class="btn btn-orange">
+                Register
+            </a>
+
+        </div>
+
     </div>
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#plans">Plans</a>
-        <a href="#how">How It Works</a>
-        <a href="#dashboard">Dashboard</a>
-        <a href="#faq">FAQ</a>
-    </nav>
-
-    <div class="nav-buttons">
-        <button class="btn-dark" onclick="openModal('login')">Login</button>
-        <button class="btn-orange" onclick="openModal('register')">Register</button>
-    </div>
-
-</div>
 </header>
 
 
-<main>
+
+<!-- HERO -->
 
 <section class="hero" id="home">
 
-<div>
 
-<span class="badge">BITCOIN • DIGITAL ASSET PLATFORM</span>
+    <div>
 
-<h1>
-Build your crypto portfolio with
-<span>Bitcoin.</span>
-</h1>
-
-<p>
-Access a professional digital-asset investment platform designed to help users track Bitcoin investments, monitor portfolio performance and manage their assets from one dashboard.
-</p>
-
-<div class="hero-buttons">
-<a href="#plans" class="btn btn-orange">View Investment Plans</a>
-<a href="#how" class="btn btn-dark">How It Works</a>
-</div>
-
-</div>
+        <span class="badge">
+            BITCOIN • DIGITAL ASSET PLATFORM
+        </span>
 
 
-<div class="hero-card">
+        <h1>
 
-<div class="btc-circle">₿</div>
+            Build Your
+            <span>Bitcoin Portfolio.</span>
 
-<div class="price" id="btcPrice">
-$104,500
-</div>
+        </h1>
 
-<div class="price-change">
-+2.84% Today
-</div>
 
-<hr style="border-color:#202b3a;margin:25px 0">
+        <p>
 
-<div class="result-row">
-<span>Asset</span>
-<strong>Bitcoin (BTC)</strong>
-</div>
+            A modern Bitcoin-focused investment platform
+            designed to help users manage their digital assets,
+            monitor portfolio performance and track investment
+            activity from one convenient dashboard.
 
-<div class="result-row">
-<span>Market</span>
-<strong>BTC/USD</strong>
-</div>
+        </p>
 
-<div class="result-row">
-<span>Status</span>
-<strong style="color:#25d695">Active</strong>
-</div>
 
-</div>
+        <div class="hero-buttons">
+
+            <a href="plans.html"
+               class="btn btn-orange">
+
+                View Investment Plans
+
+            </a>
+
+
+            <a href="#how"
+               class="btn btn-dark">
+
+                How It Works
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- BTC CARD -->
+
+    <div class="hero-card">
+
+        <div class="btc-circle">
+            ₿
+        </div>
+
+
+        <div class="btc-price">
+            $104,500
+        </div>
+
+
+        <div class="btc-change">
+            +2.84% Today
+        </div>
+
+
+        <div class="card-line"></div>
+
+
+        <div class="card-row">
+
+            <span>
+                Asset
+            </span>
+
+            <strong>
+                Bitcoin (BTC)
+            </strong>
+
+        </div>
+
+
+        <div class="card-row">
+
+            <span>
+                Market
+            </span>
+
+            <strong>
+                BTC/USD
+            </strong>
+
+        </div>
+
+
+        <div class="card-row">
+
+            <span>
+                Platform
+            </span>
+
+            <strong class="active">
+                Active
+            </strong>
+
+        </div>
+
+    </div>
 
 </section>
 
+
+
+<!-- STATS -->
 
 <div class="stats">
 
-<div class="stat">
-<h3>BTC</h3>
-<p>Primary digital asset</p>
-</div>
+    <div class="stat">
 
-<div class="stat">
-<h3>24/7</h3>
-<p>Portfolio access</p>
-</div>
+        <h3>
+            BTC
+        </h3>
 
-<div class="stat">
-<h3>Secure</h3>
-<p>Account protection</p>
-</div>
+        <p>
+            Primary digital asset
+        </p>
 
-<div class="stat">
-<h3>Live</h3>
-<p>Portfolio tracking</p>
-</div>
-
-</div>
+    </div>
 
 
-<section id="plans">
+    <div class="stat">
 
-<div class="section-title">
-<h2>Investment Plans</h2>
-<p>Choose a portfolio plan that matches your investment objectives.</p>
-</div>
+        <h3>
+            24/7
+        </h3>
 
-<div class="plans">
+        <p>
+            Portfolio access
+        </p>
 
-<div class="plan">
-
-<h3>Starter</h3>
-<div class="duration">30 Days</div>
-
-<div class="plan-price">$300+</div>
-
-<ul>
-<li>Portfolio tracking</li>
-<li>Bitcoin-focused strategy</li>
-<li>Performance reporting</li>
-<li>Account dashboard</li>
-<li>24/7 access</li>
-</ul>
-
-<button class="btn-orange" onclick="selectPlan('Starter')">
-Get Started
-</button>
-
-</div>
+    </div>
 
 
-<div class="plan featured">
+    <div class="stat">
 
-<div class="popular">POPULAR</div>
+        <h3>
+            Secure
+        </h3>
 
-<h3>Professional</h3>
-<div class="duration">90 Days</div>
+        <p>
+            Account protection
+        </p>
 
-<div class="plan-price">$1,000+</div>
+    </div>
 
-<ul>
-<li>Advanced portfolio tracking</li>
-<li>Bitcoin strategy allocation</li>
-<li>Detailed performance reports</li>
-<li>Priority account support</li>
-<li>Portfolio monitoring</li>
-</ul>
 
-<button class="btn-orange" onclick="selectPlan('Professional')">
-Get Started
-</button>
+    <div class="stat">
+
+        <h3>
+            Live
+        </h3>
+
+        <p>
+            Portfolio tracking
+        </p>
+
+    </div>
 
 </div>
 
 
-<div class="plan">
 
-<h3>Premium</h3>
-<div class="duration">180 Days</div>
+<!-- FEATURES -->
 
-<div class="plan-price">$5,000+</div>
+<section class="standard" id="about">
 
-<ul>
-<li>Premium portfolio management</li>
-<li>Advanced analytics</li>
-<li>Detailed reporting</li>
-<li>Priority support</li>
-<li>Enhanced monitoring</li>
-</ul>
+    <div class="section-title">
 
-<button class="btn-orange" onclick="selectPlan('Premium')">
-Get Started
-</button>
+        <h2>
+            Built For Modern Crypto Investors
+        </h2>
 
-</div>
+        <p>
+            Manage your Bitcoin portfolio through a clean,
+            simple and transparent interface.
+        </p>
 
-</div>
+    </div>
 
-<p style="text-align:center;color:#7f8b9b;font-size:12px;margin-top:25px">
-Investment returns are not guaranteed. Digital assets are volatile and may result in loss of capital.
-</p>
+
+    <div class="features">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ₿
+            </div>
+
+            <h3>
+                Bitcoin Focused
+            </h3>
+
+            <p>
+                A platform designed around Bitcoin and
+                digital-asset portfolio management.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ✓
+            </div>
+
+            <h3>
+                Portfolio Tracking
+            </h3>
+
+            <p>
+                Keep track of deposits, holdings and
+                portfolio performance from one dashboard.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ◆
+            </div>
+
+            <h3>
+                Simple Experience
+            </h3>
+
+            <p>
+                A straightforward interface designed for
+                both new and experienced digital-asset users.
+            </p>
+
+        </div>
+
+
+    </div>
 
 </section>
 
 
-<section>
 
-<div class="section-title">
+<!-- PLANS PREVIEW -->
 
-<h2>Investment Calculator</h2>
+<section class="standard" id="plans">
 
-<p>Estimate potential portfolio values using your own assumptions.</p>
+    <div class="section-title">
 
-</div>
+        <h2>
+            Investment Plans
+        </h2>
 
-<div class="calculator">
+        <p>
+            Explore our available Bitcoin investment cycles.
+        </p>
 
-<div class="input-group">
-
-<label>Investment Amount (USD)</label>
-
-<input
-type="number"
-id="investment"
-value="1000"
-min="1"
-oninput="calculate()"
->
-
-</div>
+    </div>
 
 
-<div class="input-group">
-
-<label>Estimated Return (%)</label>
-
-<input
-type="number"
-id="returnRate"
-value="25"
-oninput="calculate()"
->
-
-</div>
+    <div class="plans-preview">
 
 
-<div class="input-group">
+        <!-- STARTER -->
 
-<label>Investment Period</label>
+        <div class="plan">
 
-<select id="period">
-<option>30 Days</option>
-<option>90 Days</option>
-<option>180 Days</option>
-</select>
-</div>
+            <h3>
+                Starter
+            </h3>
+
+            <div class="plan-duration">
+                3-Day Cycle
+            </div>
+
+            <div class="plan-amount">
+                $300
+            </div>
 
 
-<div class="result">
+            <div class="plan-return">
 
-<div class="result-row">
-<span>Initial Investment</span>
-<span id="initial">$1,000</span>
-</div>
+                <small>
+                    Projected Value
+                </small>
 
-<div class="result-row">
-<span>Estimated Gain</span>
-<span id="gain">$250</span>
-</div>
+                <strong>
+                    $5,000
+                </strong>
 
-<div class="result-row">
-<span>Estimated Value</span>
-<span id="total">$1,250</span>
-</div>
+            </div>
 
-</div>
 
-<p class="notice">
-Illustrative calculation only. Actual investment performance can be higher or lower.
-</p>
+            <ul>
 
-</div>
+                <li>
+                    Portfolio tracking
+                </li>
+
+                <li>
+                    Bitcoin-focused strategy
+                </li>
+
+                <li>
+                    Performance reporting
+                </li>
+
+            </ul>
+
+
+            <a href="register.html?plan=starter"
+               class="btn btn-orange">
+
+                Get Started
+
+            </a>
+
+        </div>
+
+
+
+        <!-- ADVANCED -->
+
+        <div class="plan featured">
+
+            <h3>
+                Advanced
+            </h3>
+
+            <div class="plan-duration">
+                3-Day Cycle
+            </div>
+
+            <div class="plan-amount">
+                $500
+            </div>
+
+
+            <div class="plan-return">
+
+                <small>
+                    Projected Value
+                </small>
+
+                <strong>
+                    $7,500
+                </strong>
+
+            </div>
+
+
+            <ul>
+
+                <li>
+                    Portfolio monitoring
+                </li>
+
+                <li>
+                    Performance reporting
+                </li>
+
+                <li>
+                    Priority support
+                </li>
+
+            </ul>
+
+
+            <a href="register.html?plan=advanced"
+               class="btn btn-orange">
+
+                Get Started
+
+            </a>
+
+        </div>
+
+
+
+        <!-- PROFESSIONAL -->
+
+        <div class="plan">
+
+            <h3>
+                Professional
+            </h3>
+
+            <div class="plan-duration">
+                3-Day Cycle
+            </div>
+
+            <div class="plan-amount">
+                $1,000
+            </div>
+
+
+            <div class="plan-return">
+
+                <small>
+                    Projected Value
+                </small>
+
+                <strong>
+                    $15,000
+                </strong>
+
+            </div>
+
+
+            <ul>
+
+                <li>
+                    Advanced tracking
+                </li>
+
+                <li>
+                    Detailed reporting
+                </li>
+
+                <li>
+                    Priority support
+                </li>
+
+            </ul>
+
+
+            <a href="register.html?plan=professional"
+               class="btn btn-orange">
+
+                Get Started
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="view-plans">
+
+        <a href="plans.html"
+           class="btn btn-dark">
+
+            View All Plans →
+
+        </a>
+
+    </div>
 
 </section>
 
 
-<section id="how">
 
-<div class="section-title">
+<!-- HOW IT WORKS -->
 
-<h2>How It Works</h2>
+<section class="standard" id="how">
 
-<p>A simple process for managing your digital-asset portfolio.</p>
+    <div class="section-title">
 
-</div>
+        <h2>
+            How It Works
+        </h2>
 
-<div class="steps">
+        <p>
+            Get started with a simple four-step process.
+        </p>
 
-<div class="step">
-
-<div class="step-number">1</div>
-
-<h3>Create Account</h3>
-
-<p>Register your account and complete the required account information.</p>
-
-</div>
+    </div>
 
 
-<div class="step">
-
-<div class="step-number">2</div>
-
-<h3>Select Plan</h3>
-
-<p>Select the portfolio plan that fits your investment objectives.</p>
-
-</div>
+    <div class="steps">
 
 
-<div class="step">
+        <div class="step">
 
-<div class="step-number">3</div>
+            <div class="step-number">
+                1
+            </div>
 
-<h3>Fund Account</h3>
+            <h3>
+                Create Account
+            </h3>
 
-<p>Fund your account using the supported digital-asset payment method.</p>
+            <p>
+                Register your account and provide the
+                required information.
+            </p>
 
-</div>
-
-
-<div class="step">
-
-<div class="step-number">4</div>
-
-<h3>Track Portfolio</h3>
-
-<p>Monitor your portfolio and transaction activity from your dashboard.</p>
-
-</div>
-
-</div>
-
-</section>
+        </div>
 
 
-<section id="dashboard">
+        <div class="step">
 
-<div class="section-title">
+            <div class="step-number">
+                2
+            </div>
 
-<h2>Client Dashboard</h2>
+            <h3>
+                Select Plan
+            </h3>
 
-<p>Example of the portfolio interface.</p>
+            <p>
+                Choose an investment plan based on your
+                objectives.
+            </p>
 
-</div>
+        </div>
 
-<div class="dashboard">
 
-<div class="dashboard-top">
+        <div class="step">
 
-<strong>Portfolio Overview</strong>
+            <div class="step-number">
+                3
+            </div>
 
-<span style="color:#25d695">● Account Active</span>
+            <h3>
+                Fund Account
+            </h3>
 
-</div>
+            <p>
+                Fund your account using the supported
+                payment method.
+            </p>
 
-<div class="balance">
+        </div>
 
-<small>Total Portfolio Value</small>
 
-<h2>$12,850.00</h2>
+        <div class="step">
 
-<span style="color:#25d695">
-+$2,850.00 Estimated Gain
-</span>
+            <div class="step-number">
+                4
+            </div>
 
-</div>
+            <h3>
+                Track Portfolio
+            </h3>
 
-<div class="dashboard-grid">
+            <p>
+                Monitor your portfolio and transaction
+                activity through your dashboard.
+            </p>
 
-<div class="dash-card">
+        </div>
 
-<small>BTC Holdings</small>
-
-<strong>0.1234 BTC</strong>
-
-</div>
-
-<div class="dash-card">
-
-<small>Total Deposits</small>
-
-<strong>$10,000</strong>
-
-</div>
-
-<div class="dash-card">
-
-<small>Portfolio Change</small>
-
-<strong style="color:#25d695">+28.50%</strong>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
-<section id="faq">
 
-<div class="section-title">
+<!-- CTA -->
 
-<h2>Frequently Asked Questions</h2>
+<div class="cta" id="contact">
 
-</div>
+    <h2>
+        Ready to Get Started?
+    </h2>
 
-<div class="faq">
+    <p>
+        Create your account and explore the available
+        Bitcoin investment plans.
+    </p>
 
-<details>
-<summary>What is BTC INVEST?</summary>
-<p>
-BTC INVEST is a digital-asset portfolio platform concept designed for Bitcoin-focused investment tracking and account management.
-</p>
-</details>
 
-<details>
-<summary>Is Bitcoin investment risk-free?</summary>
-<p>
-No. Bitcoin and other digital assets are volatile. Investors can lose part or all of their invested capital.
-</p>
-</details>
+    <a href="register.html"
+       class="btn btn-orange">
 
-<details>
-<summary>How do I create an account?</summary>
-<p>
-Click Register, provide the requested information, and follow the account setup process.
-</p>
-</details>
+        Create Account
 
-<details>
-<summary>Can I monitor my investment?</summary>
-<p>
-Yes. The platform dashboard is designed to display portfolio value, deposits, holdings and performance information.
-</p>
-</details>
+    </a>
 
 </div>
 
-</section>
 
-</main>
 
+<!-- FOOTER -->
 
 <footer>
 
-<div class="logo" style="justify-content:center;margin-bottom:15px">
-<div class="logo-icon">₿</div>
-BTC INVEST
-</div>
+    <a href="index.html" class="logo">
 
-<p>
-© 2026 BTC INVEST. All rights reserved.
-</p>
+        <div class="logo-icon">
+            ₿
+        </div>
 
-<p style="font-size:12px;margin-top:10px">
-Digital asset investments involve significant risk. Past or projected performance does not guarantee future results.
-</p>
+        BTC INVEST
+
+    </a>
+
+
+    <p>
+        © 2026 BTC INVEST. All rights reserved.
+    </p>
+
+
+    <small>
+
+        Digital asset investments involve significant risk.
+        Projected or illustrative performance does not
+        guarantee future results. Users should carefully
+        consider the risks before investing.
+
+    </small>
 
 </footer>
 
-
-<!-- LOGIN MODAL -->
-
-<div class="modal" id="loginModal">
-
-<div class="modal-box">
-
-<div class="close" onclick="closeModal('login')">×</div>
-
-<h2>Login</h2>
-
-<div class="input-group">
-
-<label>Email Address</label>
-
-<input type="email" placeholder="you@example.com">
-
-</div>
-
-<div class="input-group">
-
-<label>Password</label>
-
-<input type="password" placeholder="••••••••">
-
-</div>
-
-<button class="btn-orange" onclick="demoLogin()">
-Login
-</button>
-
-<p class="notice">
-Demo interface — connect this form to your backend for real authentication.
-</p>
-
-</div>
-
-</div>
-
-
-<!-- REGISTER MODAL -->
-
-<div class="modal" id="registerModal">
-
-<div class="modal-box">
-
-<div class="close" onclick="closeModal('register')">×</div>
-
-<h2>Create Account</h2>
-
-<div class="input-group">
-
-<label>Full Name</label>
-
-<input type="text" placeholder="Full Name">
-
-</div>
-
-<div class="input-group">
-
-<label>Email Address</label>
-
-<input type="email" placeholder="you@example.com">
-
-</div>
-
-<div class="input-group">
-
-<label>Password</label>
-
-<input type="password" placeholder="Create password">
-
-</div>
-
-<button class="btn-orange" onclick="demoRegister()">
-Create Account
-</button>
-
-<p class="notice">
-Demo interface — connect this form to your backend for real account creation.
-</p>
-
-</div>
-
-</div>
-
-
-<script>
-
-function openModal(type){
-
-if(type==="login"){
-document.getElementById("loginModal").style.display="flex";
-}
-
-if(type==="register"){
-document.getElementById("registerModal").style.display="flex";
-}
-
-}
-
-function closeModal(type){
-
-if(type==="login"){
-document.getElementById("loginModal").style.display="none";
-}
-
-if(type==="register"){
-document.getElementById("registerModal").style.display="none";
-}
-
-}
-
-window.onclick=function(event){
-
-if(event.target.classList.contains("modal")){
-event.target.style.display="none";
-}
-
-}
-
-
-function calculate(){
-
-let investment=parseFloat(
-document.getElementById("investment").value
-)||0;
-
-let rate=parseFloat(
-document.getElementById("returnRate").value
-)||0;
-
-let gain=investment*(rate/100);
-
-let total=investment+gain;
-
-document.getElementById("initial").innerText=
-"$"+investment.toLocaleString(
-"en-US",
-{minimumFractionDigits:2}
-);
-
-document.getElementById("gain").innerText=
-"$"+gain.toLocaleString(
-"en-US",
-{minimumFractionDigits:2}
-);
-
-document.getElementById("total").innerText=
-"$"+total.toLocaleString(
-"en-US",
-{minimumFractionDigits:2}
-);
-
-}
-
-
-function selectPlan(plan){
-
-document.getElementById("investment").scrollIntoView({
-behavior:"smooth"
-});
-
-setTimeout(function(){
-
-alert(
-"You selected the "+plan+
-" plan. Connect this button to your account/deposit system."
-);
-
-},500);
-
-}
-
-
-function demoLogin(){
-
-alert(
-"Demo login interface. Connect this form to your authentication backend."
-);
-
-}
-
-
-function demoRegister(){
-
-alert(
-"Demo registration interface. Connect this form to your database/backend."
-);
-
-}
-
-calculate();
-
-</script>
 
 </body>
 </html>
