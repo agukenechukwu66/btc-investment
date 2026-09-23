@@ -87,7 +87,7 @@ main{
 
 .hero{
     text-align:center;
-    margin-bottom:35px;
+    margin-bottom:45px;
 }
 
 .hero h1{
@@ -104,18 +104,6 @@ main{
     max-width:650px;
     margin:auto;
     line-height:1.6;
-}
-
-.demo-notice{
-    max-width:850px;
-    margin:0 auto 30px;
-    padding:15px 18px;
-    border:1px solid rgba(247,147,26,.3);
-    background:rgba(247,147,26,.06);
-    border-radius:10px;
-    color:#cbd3df;
-    text-align:center;
-    font-size:13px;
 }
 
 .plans{
@@ -211,6 +199,10 @@ li::before{
     cursor:pointer;
 }
 
+.invest:hover{
+    opacity:.9;
+}
+
 .invest:disabled{
     opacity:.55;
     cursor:not-allowed;
@@ -227,11 +219,11 @@ li::before{
     line-height:1.5;
 }
 
-.success{
+.info{
     display:block;
-    background:rgba(37,214,149,.08);
-    border:1px solid rgba(37,214,149,.25);
-    color:var(--green);
+    background:rgba(247,147,26,.07);
+    border:1px solid rgba(247,147,26,.25);
+    color:#cbd3df;
 }
 
 .error{
@@ -281,6 +273,7 @@ li::before{
 
 </header>
 
+
 <main>
 
 <div class="hero">
@@ -290,16 +283,9 @@ Investment <span>Plans</span>
 </h1>
 
 <p>
-Choose an investment plan for your demonstration
-portfolio.
+Choose an investment plan and submit an investment request.
 </p>
 
-</div>
-
-<div class="demo-notice">
-<strong>Demo Account:</strong>
-Investment balances and projected values on this page
-are simulated and are not real financial transactions.
 </div>
 
 
@@ -310,9 +296,13 @@ are simulated and are not real financial transactions.
 
 <div class="plan">
 
-<span class="badge">STARTER</span>
+<span class="badge">
+STARTER
+</span>
 
-<h2>Starter</h2>
+<h2>
+Starter
+</h2>
 
 <div class="cycle">
 3-Day Cycle
@@ -324,9 +314,13 @@ $300
 
 <div class="projected">
 
-<small>Illustrative Projected Value</small>
+<small>
+Projected Value
+</small>
 
-<strong>$5,000</strong>
+<strong>
+$5,000
+</strong>
 
 </div>
 
@@ -355,9 +349,13 @@ Invest $300
 
 <div class="plan featured">
 
-<span class="badge">POPULAR</span>
+<span class="badge">
+POPULAR
+</span>
 
-<h2>Advanced</h2>
+<h2>
+Advanced
+</h2>
 
 <div class="cycle">
 3-Day Cycle
@@ -369,9 +367,13 @@ $500
 
 <div class="projected">
 
-<small>Illustrative Projected Value</small>
+<small>
+Projected Value
+</small>
 
-<strong>$7,500</strong>
+<strong>
+$7,500
+</strong>
 
 </div>
 
@@ -400,9 +402,13 @@ Invest $500
 
 <div class="plan">
 
-<span class="badge">PROFESSIONAL</span>
+<span class="badge">
+PROFESSIONAL
+</span>
 
-<h2>Professional</h2>
+<h2>
+Professional
+</h2>
 
 <div class="cycle">
 3-Day Cycle
@@ -414,9 +420,13 @@ $1,000
 
 <div class="projected">
 
-<small>Illustrative Projected Value</small>
+<small>
+Projected Value
+</small>
 
-<strong>$15,000</strong>
+<strong>
+$15,000
+</strong>
 
 </div>
 
@@ -450,164 +460,49 @@ Invest $1,000
 
 <script>
 
-const STORAGE_KEY = "btc_demo_investment";
+/*
+=====================================================
+INVESTMENT BUTTONS
+
+Database connection will be added in the next step.
+No localStorage investment records are created here.
+=====================================================
+*/
+
+const buttons =
+document.querySelectorAll(".invest");
+
+const message =
+document.getElementById("message");
 
 
-function getDemoAccount(){
+function showMessage(text){
 
-    const saved =
-        localStorage.getItem(STORAGE_KEY);
+    message.textContent = text;
 
-    if(saved){
-
-        try{
-            return JSON.parse(saved);
-        }
-        catch(e){
-            console.error(e);
-        }
-
-    }
-
-    return {
-        availableUSD:6000,
-        activeInvestmentUSD:0,
-        planName:"",
-        cycle:0,
-        projectedValueUSD:0,
-        projectedProfitUSD:0,
-        status:"none",
-        investedAt:null
-    };
-}
-
-
-function saveDemoAccount(account){
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(account)
-    );
+    message.className =
+        "message info";
 
 }
 
 
-function showMessage(text,type){
+buttons.forEach(button => {
 
-    const box =
-        document.getElementById("message");
-
-    box.textContent = text;
-
-    box.className =
-        "message " + type;
-
-}
-
-
-document
-.querySelectorAll(".invest")
-.forEach(button => {
-
-    button.addEventListener("click",function(){
-
-        const account =
-            getDemoAccount();
-
-        const amount =
-            Number(this.dataset.amount);
+    button.addEventListener("click", function(){
 
         const plan =
             this.dataset.plan;
 
-        const cycle =
-            Number(this.dataset.cycle);
-
-        const projected =
-            Number(this.dataset.projected);
-
-
-        /*
-         * Prevent another active demo investment.
-         */
-
-        if(account.activeInvestmentUSD > 0){
-
-            showMessage(
-                "You already have an active demo investment.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        /*
-         * Check available demo balance.
-         */
-
-        if(account.availableUSD < amount){
-
-            showMessage(
-                "Insufficient available demo balance.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        /*
-         * Move the amount from
-         * available balance into
-         * active investment.
-         */
-
-        account.availableUSD -= amount;
-
-        account.activeInvestmentUSD = amount;
-
-        account.planName = plan;
-
-        account.cycle = cycle;
-
-        account.projectedValueUSD = projected;
-
-        account.projectedProfitUSD =
-            projected - amount;
-
-        account.status = "active";
-
-        account.investedAt =
-            new Date().toISOString();
-
-
-        saveDemoAccount(account);
-
-
-        document
-        .querySelectorAll(".invest")
-        .forEach(btn => {
-            btn.disabled = true;
-        });
+        const amount =
+            Number(this.dataset.amount);
 
 
         showMessage(
             plan +
-            " investment created successfully. " +
-            "$" +
+            " — $" +
             amount.toLocaleString() +
-            " moved into Active Investment.",
-            "success"
+            " investment request is ready for processing."
         );
-
-
-        setTimeout(() => {
-
-            window.location.href =
-                "dashboard.html";
-
-        },800);
 
     });
 
