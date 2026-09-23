@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | BTC Invest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        :root {
+            --orange: #f7931a;
+            --dark: #070b12;
+            --card: #101722;
+            --border: #202b3a;
+            --muted: #9ba7b7;
+            --green: #25d695;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top right,
+                rgba(247,147,26,.10),
+                transparent 35%),
+                var(--dark);
+            color: white;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            background: rgba(7,11,18,.97);
+        }
+
+        .nav {
+            max-width: 1200px;
+            min-height: 72px;
+            margin: auto;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+
+            background: var(--orange);
+            color: #111;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            color: #c5ccd6;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover,
+        .nav-links .active {
+            color: var(--orange);
+        }
+
+        main {
+            max-width: 1050px;
+            margin: auto;
+            padding: 65px 20px 80px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero-icon {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+            background: var(--orange);
+            color: #111;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--card);
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            padding: 25px;
+        }
+
+        .card-icon {
+            width: 45px;
+            height: 45px;
+
+            margin-bottom: 17px;
+
+            border-radius: 10px;
+
+            background: rgba(247,147,26,.10);
+            color: var(--orange);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .card h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .section {
+            background: var(--card);
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            padding: 30px;
+
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            font-size: 23px;
+            margin-bottom: 13px;
+        }
+
+        .section p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .notice {
+            background: rgba(247,147,26,.06);
+
+            border: 1px solid rgba(247,147,26,.18);
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .notice strong {
+            color: var(--orange);
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 13px 22px;
+
+            border-radius: 9px;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .btn-orange {
+            background: var(--orange);
+            color: #111;
+        }
+
+        .btn-dark {
+            background: #151e2b;
+            color: white;
+            border: 1px solid var(--border);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+
+            padding: 28px 20px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .nav {
+                flex-direction: column;
+                justify-content: center;
+                gap: 12px;
+                padding: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            main {
+                padding: 45px 15px 60px;
+            }
+
+            .section {
+                padding: 22px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="nav">
+
+        <a href="index.html" class="logo">
+            <div class="logo-icon">₿</div>
+            BTC INVEST
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="plans.html">
+                Plans
+            </a>
+
+            <a href="about.html" class="active">
+                About
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <section class="hero">
+
+        <div class="hero-icon">
+            ₿
+        </div>
+
+        <h1>
+            About BTC Invest
+        </h1>
+
+        <p>
+            Learn more about our platform, the services we provide,
+            and how users can manage their Bitcoin investment activity
+            through their account.
+        </p>
+
+    </section>
+
+
+    <section class="grid">
+
+        <div class="card">
+
+            <div class="card-icon">
+                ₿
+            </div>
+
+            <h2>
+                Bitcoin Focused
+            </h2>
+
+            <p>
+                Our platform is designed around Bitcoin deposits,
+                account management and investment-plan information.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ✓
+            </div>
+
+            <h2>
+                Account Management
+            </h2>
+
+            <p>
+                Registered users can access a dashboard to view
+                account information, deposit details and transaction
+                activity.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                $
+            </div>
+
+            <h2>
+                Transparent Information
+            </h2>
+
+            <p>
+                Investment information, deposit instructions and
+                account activity should be clearly presented to users.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="section">
+
+        <h2>
+            Our Platform
+        </h2>
+
+        <p>
+            BTC Invest is a Bitcoin-focused web platform interface
+            designed to provide users with a central location for
+            viewing investment plans, managing account information
+            and accessing Bitcoin deposit and withdrawal features.
+        </p>
+
+    </section>
+
+
+    <section class="section">
+
+        <h2>
+            Security & Transparency
+        </h2>
+
+        <p>
+            Users should always verify Bitcoin wallet addresses before
+            making a transaction. Blockchain transactions are generally
+            irreversible, so users should carefully confirm the network
+            and destination address before sending funds.
+        </p>
+
+        <br>
+
+        <div class="notice">
+
+            <strong>Important:</strong>
+            The website interface does not by itself guarantee investment
+            returns. Actual account balances, transactions and investment
+            activity should be connected to verified backend systems and
+            accurate transaction records.
+
+        </div>
+
+    </section>
+
+
+    <div class="actions">
+
+        <a
+            href="plans.html"
+            class="btn btn-orange"
+        >
+            View Investment Plans
+        </a>
+
+        <a
+            href="contact.html"
+            class="btn btn-dark"
+        >
+            Contact Us
+        </a>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    © 2026 BTC INVEST. All rights reserved.
+
+</footer>
+
+</body>
+</html>
