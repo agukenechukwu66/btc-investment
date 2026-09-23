@@ -1,865 +1,728 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Dashboard | BTC Invest</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        :root {
-            --orange: #f7931a;
-            --dark: #070b12;
-            --card: #101722;
-            --border: #202b3a;
-            --muted: #9ba7b7;
-            --green: #25d695;
-            --red: #ff5c5c;
-        }
-
-        body {
-            background: #070b12;
-            color: white;
-        }
-
-        /* HEADER */
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-
-            background: rgba(7,11,18,.97);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav {
-            max-width: 1250px;
-            min-height: 72px;
-
-            margin: auto;
-            padding: 0 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-
-            color: white;
-            text-decoration: none;
-
-            font-size: 21px;
-            font-weight: bold;
-        }
-
-        .logo-icon {
-            width: 39px;
-            height: 39px;
-
-            border-radius: 50%;
-
-            background: var(--orange);
-            color: #111;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 23px;
-            font-weight: bold;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-
-        .user-name {
-            color: #cbd3df;
-            font-size: 14px;
-        }
-
-        .logout {
-            color: var(--orange);
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        /* LAYOUT */
-
-        .layout {
-            max-width: 1250px;
-            margin: auto;
-
-            display: grid;
-            grid-template-columns: 220px 1fr;
-
-            min-height: calc(100vh - 72px);
-        }
-
-        /* SIDEBAR */
-
-        aside {
-            border-right: 1px solid var(--border);
-            padding: 30px 15px;
-        }
-
-        .menu-title {
-            color: #687586;
-            font-size: 11px;
-            font-weight: bold;
-
-            text-transform: uppercase;
-
-            padding: 0 12px;
-            margin-bottom: 10px;
-        }
-
-        .menu a {
-            display: block;
-
-            padding: 12px;
-
-            border-radius: 8px;
-
-            color: #b9c3d0;
-            text-decoration: none;
-
-            font-size: 14px;
-
-            margin-bottom: 5px;
-        }
-
-        .menu a:hover,
-        .menu a.active {
-            background: rgba(247,147,26,.1);
-            color: var(--orange);
-        }
-
-        /* MAIN */
-
-        main {
-            padding: 35px 25px 60px;
-        }
-
-        .welcome {
-            margin-bottom: 28px;
-        }
-
-        .welcome h1 {
-            font-size: 30px;
-            margin-bottom: 5px;
-        }
-
-        .welcome p {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        /* BALANCE */
-
-        .balance-card {
-            background:
-                linear-gradient(135deg, #151f2c, #0d141e);
-
-            border: 1px solid var(--border);
-            border-radius: 16px;
-
-            padding: 28px;
-
-            margin-bottom: 20px;
-        }
-
-        .balance-label {
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        .balance {
-            font-size: 42px;
-            font-weight: bold;
-
-            margin: 5px 0;
-        }
-
-        .btc-balance {
-            color: var(--orange);
-            font-size: 14px;
-        }
-
-        .balance-actions {
-            display: flex;
-            gap: 10px;
-
-            margin-top: 22px;
-        }
-
-        .btn {
-            display: inline-block;
-
-            padding: 11px 18px;
-
-            border-radius: 8px;
-
-            text-decoration: none;
-
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        .btn-orange {
-            background: var(--orange);
-            color: #111;
-        }
-
-        .btn-dark {
-            background: #151e2b;
-            color: white;
-
-            border: 1px solid var(--border);
-        }
-
-        /* STATS */
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
-            gap: 15px;
-
-            margin-bottom: 25px;
-        }
-
-        .stat {
-            background: var(--card);
-
-            border: 1px solid var(--border);
-
-            border-radius: 12px;
-
-            padding: 22px;
-        }
-
-        .stat-label {
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        .stat-value {
-            font-size: 23px;
-            font-weight: bold;
-
-            margin-top: 7px;
-        }
-
-        .green {
-            color: var(--green);
-        }
-
-        .orange {
-            color: var(--orange);
-        }
-
-        /* GRID */
-
-        .content-grid {
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--card);
-
-            border: 1px solid var(--border);
-
-            border-radius: 14px;
-
-            padding: 25px;
-        }
-
-        .card h2 {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        /* PLAN */
-
-        .plan-box {
-            background: #0b111a;
-
-            border: 1px solid var(--border);
-
-            border-radius: 10px;
-
-            padding: 18px;
-        }
-
-        .plan-top {
-            display: flex;
-            justify-content: space-between;
-
-            margin-bottom: 15px;
-        }
-
-        .plan-name {
-            font-weight: bold;
-        }
-
-        .status {
-            color: var(--green);
-            font-size: 12px;
-        }
-
-        .plan-row {
-            display: flex;
-            justify-content: space-between;
-
-            color: var(--muted);
-
-            font-size: 13px;
-
-            padding: 8px 0;
-
-            border-bottom: 1px solid #19222e;
-        }
-
-        .plan-row:last-child {
-            border-bottom: none;
-        }
-
-        .plan-row strong {
-            color: white;
-        }
-
-        /* TRANSACTIONS */
-
-        .transaction {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 13px 0;
-
-            border-bottom: 1px solid #19222e;
-        }
-
-        .transaction:last-child {
-            border-bottom: none;
-        }
-
-        .transaction-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .transaction-icon {
-            width: 35px;
-            height: 35px;
-
-            border-radius: 50%;
-
-            background: rgba(247,147,26,.1);
-
-            color: var(--orange);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .transaction-name {
-            font-size: 13px;
-        }
-
-        .transaction-date {
-            color: var(--muted);
-            font-size: 11px;
-        }
-
-        .transaction-amount {
-            color: var(--green);
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        /* NOTICE */
-
-        .notice {
-            margin-top: 20px;
-
-            padding: 15px;
-
-            background: rgba(247,147,26,.05);
-
-            border: 1px solid rgba(247,147,26,.18);
-
-            border-radius: 10px;
-
-            color: var(--muted);
-
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        /* FOOTER */
-
-        footer {
-            text-align: center;
-
-            border-top: 1px solid var(--border);
-
-            padding: 25px;
-
-            color: var(--muted);
-
-            font-size: 12px;
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 950px) {
-
-            .layout {
-                grid-template-columns: 1fr;
-            }
-
-            aside {
-                display: none;
-            }
-
-            .stats {
-                grid-template-columns: repeat(2,1fr);
-            }
-
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 550px) {
-
-            main {
-                padding: 25px 15px 50px;
-            }
-
-            .user-name {
-                display: none;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .balance {
-                font-size: 34px;
-            }
-
-            .balance-actions {
-                flex-direction: column;
-            }
-
-            .balance-actions .btn {
-                text-align: center;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | BTC Invest</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+
+:root{
+--orange:#f7931a;
+--dark:#070b12;
+--card:#101722;
+--border:#202b3a;
+--muted:#9ba7b7;
+--green:#25d695;
+}
+
+body{
+background:var(--dark);
+color:white;
+min-height:100vh;
+}
+
+header{
+border-bottom:1px solid var(--border);
+background:rgba(7,11,18,.97);
+}
+
+.nav{
+max-width:1250px;
+min-height:72px;
+margin:auto;
+padding:0 20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+color:white;
+text-decoration:none;
+font-size:21px;
+font-weight:bold;
+}
+
+.logo-icon{
+width:39px;
+height:39px;
+border-radius:50%;
+background:var(--orange);
+color:#111;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:23px;
+font-weight:bold;
+}
+
+.nav-right{
+display:flex;
+align-items:center;
+gap:18px;
+}
+
+.user-name{
+color:#cbd3df;
+font-size:14px;
+}
+
+.logout{
+background:none;
+border:0;
+color:var(--orange);
+cursor:pointer;
+font-size:14px;
+}
+
+.layout{
+max-width:1250px;
+margin:auto;
+display:grid;
+grid-template-columns:220px 1fr;
+min-height:calc(100vh - 72px);
+}
+
+aside{
+border-right:1px solid var(--border);
+padding:30px 15px;
+}
+
+.menu-title{
+color:#687586;
+font-size:11px;
+font-weight:bold;
+text-transform:uppercase;
+padding:0 12px;
+margin-bottom:10px;
+}
+
+.menu a{
+display:block;
+padding:12px;
+border-radius:8px;
+color:#b9c3d0;
+text-decoration:none;
+font-size:14px;
+margin-bottom:5px;
+}
+
+.menu a:hover,
+.menu a.active{
+background:rgba(247,147,26,.1);
+color:var(--orange);
+}
+
+main{
+padding:35px 25px 60px;
+}
+
+.welcome{
+margin-bottom:28px;
+}
+
+.welcome h1{
+font-size:30px;
+margin-bottom:5px;
+}
+
+.welcome p{
+color:var(--muted);
+font-size:14px;
+}
+
+.balance-card{
+background:linear-gradient(135deg,#151f2c,#0d141e);
+border:1px solid var(--border);
+border-radius:16px;
+padding:28px;
+margin-bottom:20px;
+}
+
+.balance-label{
+color:var(--muted);
+font-size:13px;
+}
+
+.balance{
+font-size:42px;
+font-weight:bold;
+margin:5px 0;
+}
+
+.btc-balance{
+color:var(--orange);
+font-size:14px;
+}
+
+.balance-actions{
+display:flex;
+gap:10px;
+margin-top:22px;
+}
+
+.btn{
+display:inline-block;
+padding:11px 18px;
+border-radius:8px;
+text-decoration:none;
+font-size:13px;
+font-weight:bold;
+}
+
+.btn-orange{
+background:var(--orange);
+color:#111;
+}
+
+.btn-dark{
+background:#151e2b;
+color:white;
+border:1px solid var(--border);
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin-bottom:25px;
+}
+
+.stat{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:12px;
+padding:22px;
+}
+
+.stat-label{
+color:var(--muted);
+font-size:12px;
+}
+
+.stat-value{
+font-size:23px;
+font-weight:bold;
+margin-top:7px;
+}
+
+.green{color:var(--green)}
+.orange{color:var(--orange)}
+
+.content-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:14px;
+padding:25px;
+}
+
+.card h2{
+font-size:18px;
+margin-bottom:20px;
+}
+
+.plan-box{
+background:#0b111a;
+border:1px solid var(--border);
+border-radius:10px;
+padding:18px;
+}
+
+.plan-top{
+display:flex;
+justify-content:space-between;
+margin-bottom:15px;
+}
+
+.plan-name{font-weight:bold}
+
+.status{
+color:var(--green);
+font-size:12px;
+}
+
+.plan-row{
+display:flex;
+justify-content:space-between;
+color:var(--muted);
+font-size:13px;
+padding:8px 0;
+border-bottom:1px solid #19222e;
+}
+
+.plan-row:last-child{border-bottom:none}
+
+.plan-row strong{color:white}
+
+.transaction{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:13px 0;
+border-bottom:1px solid #19222e;
+}
+
+.transaction:last-child{border-bottom:none}
+
+.transaction-left{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.transaction-icon{
+width:35px;
+height:35px;
+border-radius:50%;
+background:rgba(247,147,26,.1);
+color:var(--orange);
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.transaction-name{font-size:13px}
+
+.transaction-date{
+color:var(--muted);
+font-size:11px;
+}
+
+.transaction-amount{
+color:var(--green);
+font-size:13px;
+font-weight:bold;
+}
+
+.notice{
+margin-top:20px;
+padding:15px;
+background:rgba(247,147,26,.05);
+border:1px solid rgba(247,147,26,.18);
+border-radius:10px;
+color:var(--muted);
+font-size:12px;
+line-height:1.5;
+}
+
+footer{
+text-align:center;
+border-top:1px solid var(--border);
+padding:25px;
+color:var(--muted);
+font-size:12px;
+}
+
+@media(max-width:950px){
+.layout{grid-template-columns:1fr}
+aside{display:none}
+.stats{grid-template-columns:repeat(2,1fr)}
+.content-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:550px){
+main{padding:25px 15px 50px}
+.user-name{display:none}
+.stats{grid-template-columns:1fr}
+.balance{font-size:34px}
+.balance-actions{flex-direction:column}
+.balance-actions .btn{text-align:center}
+}
+</style>
 </head>
 
 <body>
 
-
-<!-- HEADER -->
-
 <header>
+<div class="nav">
 
-    <div class="nav">
+<a href="dashboard.html" class="logo">
+<div class="logo-icon">₿</div>
+BTC INVEST
+</a>
 
-        <a href="dashboard.html" class="logo">
+<div class="nav-right">
 
-            <div class="logo-icon">
-                ₿
-            </div>
+<span class="user-name" id="userName">
+Loading...
+</span>
 
-            BTC INVEST
+<button class="logout" id="logoutBtn">
+Logout
+</button>
 
-        </a>
-
-        <div class="nav-right">
-
-            <span class="user-name">
-                Welcome, Investor
-            </span>
-
-            <a href="login.html" class="logout">
-                Logout
-            </a>
-
-        </div>
-
-    </div>
-
+</div>
+</div>
 </header>
 
 
 <div class="layout">
 
+<aside>
 
-    <!-- SIDEBAR -->
+<div class="menu-title">Dashboard</div>
 
-    <aside>
+<div class="menu">
 
-        <div class="menu-title">
-            Dashboard
-        </div>
+<a href="dashboard.html" class="active">
+Overview
+</a>
 
-        <div class="menu">
+<a href="plans.html">
+Investment Plans
+</a>
 
-            <a href="dashboard.html" class="active">
-                Overview
-            </a>
+<a href="deposit.html">
+Deposit BTC
+</a>
 
-            <a href="plans.html">
-                Investment Plans
-            </a>
+<a href="withdraw.html">
+Withdraw
+</a>
 
-            <a href="deposit.html">
-                Deposit BTC
-            </a>
+</div>
 
-            <a href="withdraw.html">
-                Withdraw
-            </a>
+<br>
 
-        </div>
+<div class="menu-title">Account</div>
 
+<div class="menu">
 
-        <br>
+<a href="#">
+Profile
+</a>
 
+<a href="#">
+Security
+</a>
 
-        <div class="menu-title">
-            Account
-        </div>
+<a href="index.html">
+Back to Website
+</a>
 
-        <div class="menu">
+</div>
 
-            <a href="#">
-                Profile
-            </a>
+</aside>
 
-            <a href="#">
-                Security
-            </a>
 
-            <a href="index.html">
-                Back to Website
-            </a>
+<main>
 
-        </div>
+<div class="welcome">
 
-    </aside>
+<h1 id="welcomeTitle">
+Dashboard
+</h1>
 
+<p>
+Monitor your account and deposit activity.
+</p>
 
-    <!-- MAIN -->
+</div>
 
-    <main>
 
+<div class="balance-card">
 
-        <div class="welcome">
+<div class="balance-label">
+Portfolio Balance
+</div>
 
-            <h1>
-                Dashboard
-            </h1>
+<div class="balance">
+$0.00
+</div>
 
-            <p>
-                Monitor your portfolio and account activity.
-            </p>
+<div class="btc-balance">
+0.00000000 BTC
+</div>
 
-        </div>
+<div class="balance-actions">
 
+<a href="deposit.html" class="btn btn-orange">
+Deposit BTC
+</a>
 
-        <!-- BALANCE -->
+<a href="withdraw.html" class="btn btn-dark">
+Withdraw
+</a>
 
-        <div class="balance-card">
+</div>
 
-            <div class="balance-label">
-                Portfolio Balance
-            </div>
+</div>
 
-            <div class="balance">
-                $0.00
-            </div>
 
-            <div class="btc-balance">
-                0.00000000 BTC
-            </div>
+<div class="stats">
 
+<div class="stat">
 
-            <div class="balance-actions">
+<div class="stat-label">
+Total Deposited
+</div>
 
-                <a href="deposit.html"
-                   class="btn btn-orange">
+<div class="stat-value">
+$0.00
+</div>
 
-                    Deposit BTC
+</div>
 
-                </a>
 
-                <a href="withdraw.html"
-                   class="btn btn-dark">
+<div class="stat">
 
-                    Withdraw
+<div class="stat-label">
+Active Investment
+</div>
 
-                </a>
+<div class="stat-value orange">
+$0.00
+</div>
 
-            </div>
+</div>
 
-        </div>
 
+<div class="stat">
 
-        <!-- STATS -->
+<div class="stat-label">
+Projected Value
+</div>
 
-        <div class="stats">
+<div class="stat-value green">
+$0.00
+</div>
 
+</div>
 
-            <div class="stat">
 
-                <div class="stat-label">
-                    Total Deposited
-                </div>
+<div class="stat">
 
-                <div class="stat-value">
-                    $0.00
-                </div>
+<div class="stat-label">
+Account Status
+</div>
 
-            </div>
+<div class="stat-value green">
+Active
+</div>
 
+</div>
 
-            <div class="stat">
+</div>
 
-                <div class="stat-label">
-                    Active Investment
-                </div>
 
-                <div class="stat-value orange">
-                    $0.00
-                </div>
+<div class="content-grid">
 
-            </div>
 
+<div class="card">
 
-            <div class="stat">
+<h2>Active Investment</h2>
 
-                <div class="stat-label">
-                    Projected Value
-                </div>
+<div class="plan-box">
 
-                <div class="stat-value green">
-                    $0.00
-                </div>
+<div class="plan-top">
 
-            </div>
+<span class="plan-name">
+No Active Plan
+</span>
 
+<span class="status">
+● Ready
+</span>
 
-            <div class="stat">
+</div>
 
-                <div class="stat-label">
-                    Account Status
-                </div>
 
-                <div class="stat-value green">
-                    Active
-                </div>
+<div class="plan-row">
 
-            </div>
+<span>Investment</span>
 
-        </div>
+<strong>$0.00</strong>
 
+</div>
 
-        <!-- CONTENT -->
 
-        <div class="content-grid">
+<div class="plan-row">
 
+<span>Cycle</span>
 
-            <!-- ACTIVE PLAN -->
+<strong>—</strong>
 
-            <div class="card">
+</div>
 
-                <h2>
-                    Active Investment
-                </h2>
 
+<div class="plan-row">
 
-                <div class="plan-box">
+<span>Projected Value</span>
 
-                    <div class="plan-top">
+<strong>—</strong>
 
-                        <span class="plan-name">
-                            No Active Plan
-                        </span>
+</div>
 
-                        <span class="status">
-                            ● Ready
-                        </span>
 
-                    </div>
+<div class="plan-row">
 
+<span>Status</span>
 
-                    <div class="plan-row">
+<strong class="green">
+Waiting for Deposit
+</strong>
 
-                        <span>
-                            Investment
-                        </span>
+</div>
 
-                        <strong>
-                            $0.00
-                        </strong>
+</div>
 
-                    </div>
+<br>
 
+<a href="plans.html" class="btn btn-orange">
+View Plans
+</a>
 
-                    <div class="plan-row">
+</div>
 
-                        <span>
-                            Cycle
-                        </span>
 
-                        <strong>
-                            —
-                        </strong>
+<div class="card">
 
-                    </div>
+<h2>Recent Transactions</h2>
 
+<div class="transaction">
 
-                    <div class="plan-row">
+<div class="transaction-left">
 
-                        <span>
-                            Projected Value
-                        </span>
+<div class="transaction-icon">
+↓
+</div>
 
-                        <strong>
-                            —
-                        </strong>
+<div>
 
-                    </div>
+<div class="transaction-name">
+No transactions
+</div>
 
+<div class="transaction-date">
+Your activity will appear here
+</div>
 
-                    <div class="plan-row">
+</div>
 
-                        <span>
-                            Status
-                        </span>
+</div>
 
-                        <strong class="green">
-                            Waiting for Deposit
-                        </strong>
+<div class="transaction-amount">
+—
+</div>
 
-                    </div>
+</div>
 
-                </div>
+<div class="notice">
+Your transaction history will appear here once activity is recorded.
+</div>
 
+</div>
 
-                <br>
+</div>
 
-                <a href="plans.html"
-                   class="btn btn-orange">
 
-                    View Plans
+<div class="notice">
 
-                </a>
+<strong>Account:</strong>
 
-            </div>
+Your account is authenticated through Supabase.
+Deposit records and balances will be handled separately.
 
+</div>
 
-            <!-- TRANSACTIONS -->
-
-            <div class="card">
-
-                <h2>
-                    Recent Transactions
-                </h2>
-
-
-                <div class="transaction">
-
-                    <div class="transaction-left">
-
-                        <div class="transaction-icon">
-                            ↓
-                        </div>
-
-                        <div>
-
-                            <div class="transaction-name">
-                                No transactions
-                            </div>
-
-                            <div class="transaction-date">
-                                Your activity will appear here
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="transaction-amount">
-                        —
-                    </div>
-
-                </div>
-
-
-                <div class="notice">
-
-                    Your transaction history will appear here
-                    once activity is recorded on your account.
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-        <!-- NOTICE -->
-
-        <div class="notice">
-
-            <strong>Dashboard information:</strong>
-            The figures shown on this page are placeholders for
-            the front-end interface. Real balances, deposits,
-            withdrawals and investment records must come from a
-            secure backend and verified transaction data.
-
-        </div>
-
-
-    </main>
+</main>
 
 </div>
 
 
 <footer>
-
-    © 2026 BTC INVEST. All rights reserved.
-
+© 2026 BTC INVEST. All rights reserved.
 </footer>
 
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+"https://rikpsvmhtusupnuhgrsf.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_7O3mA4KtXSRR6skAKWkgxQ_2c-8BDug";
+
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY
+);
+
+
+async function checkUser(){
+
+const {
+data: { session },
+error
+} = await supabaseClient.auth.getSession();
+
+
+if(error || !session){
+
+window.location.replace("login.html");
+
+return;
+}
+
+
+const user = session.user;
+
+const name =
+user.user_metadata?.full_name ||
+user.email ||
+"Investor";
+
+
+document.getElementById("userName").textContent =
+"Welcome, " + name;
+
+document.getElementById("welcomeTitle").textContent =
+"Welcome, " + name;
+
+}
+
+
+document.getElementById("logoutBtn")
+.addEventListener("click", async function(){
+
+this.disabled = true;
+this.textContent = "Logging out...";
+
+const { error } =
+await supabaseClient.auth.signOut();
+
+if(error){
+
+console.error(error);
+
+this.disabled = false;
+this.textContent = "Logout";
+
+return;
+}
+
+window.location.replace("login.html");
+
+});
+
+
+checkUser();
+
+</script>
 
 </body>
 </html>
