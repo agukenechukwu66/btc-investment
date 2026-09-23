@@ -3,245 +3,260 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Investment Plans | BTC Invest</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
 
 :root{
---orange:#f7931a;
---dark:#070b12;
---card:#101722;
---border:#202b3a;
---muted:#9ba7b7;
---green:#25d695;
---red:#ff5c5c;
+    --orange:#f7931a;
+    --dark:#070b12;
+    --card:#101722;
+    --border:#202b3a;
+    --muted:#9ba7b7;
+    --green:#25d695;
+    --red:#ff5c5c;
 }
 
 body{
-background:var(--dark);
-color:white;
-min-height:100vh;
+    background:var(--dark);
+    color:white;
+    min-height:100vh;
 }
 
 header{
-border-bottom:1px solid var(--border);
-background:#070b12;
+    border-bottom:1px solid var(--border);
+    background:#070b12;
 }
 
 .nav{
-max-width:1200px;
-margin:auto;
-min-height:72px;
-padding:0 20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
+    max-width:1200px;
+    min-height:72px;
+    margin:auto;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .logo{
-display:flex;
-align-items:center;
-gap:10px;
-color:white;
-text-decoration:none;
-font-size:21px;
-font-weight:bold;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-size:21px;
+    font-weight:bold;
 }
 
 .logo-icon{
-width:39px;
-height:39px;
-border-radius:50%;
-background:var(--orange);
-color:#111;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:23px;
-font-weight:bold;
+    width:39px;
+    height:39px;
+    border-radius:50%;
+    background:var(--orange);
+    color:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:23px;
+    font-weight:bold;
 }
 
-.nav a{
-color:#cbd3df;
-text-decoration:none;
-font-size:14px;
-margin-left:20px;
+.nav-links{
+    display:flex;
+    gap:20px;
+}
+
+.nav-links a{
+    color:#cbd3df;
+    text-decoration:none;
+    font-size:14px;
 }
 
 main{
-max-width:1100px;
-margin:auto;
-padding:70px 20px;
+    max-width:1100px;
+    margin:auto;
+    padding:65px 20px;
 }
 
 .hero{
-text-align:center;
-margin-bottom:45px;
+    text-align:center;
+    margin-bottom:35px;
 }
 
 .hero h1{
-font-size:42px;
-margin-bottom:12px;
+    font-size:42px;
+    margin-bottom:12px;
 }
 
 .hero h1 span{
-color:var(--orange);
+    color:var(--orange);
 }
 
 .hero p{
-color:var(--muted);
-max-width:650px;
-margin:auto;
-font-size:14px;
+    color:var(--muted);
+    max-width:650px;
+    margin:auto;
+    line-height:1.6;
 }
 
 .demo-notice{
-margin:0 auto 30px;
-max-width:850px;
-padding:14px 18px;
-border:1px solid rgba(247,147,26,.3);
-background:rgba(247,147,26,.06);
-border-radius:10px;
-color:#cbd3df;
-font-size:13px;
-text-align:center;
+    max-width:850px;
+    margin:0 auto 30px;
+    padding:15px 18px;
+    border:1px solid rgba(247,147,26,.3);
+    background:rgba(247,147,26,.06);
+    border-radius:10px;
+    color:#cbd3df;
+    text-align:center;
+    font-size:13px;
 }
 
 .plans{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
 }
 
 .plan{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:16px;
-padding:28px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:28px;
 }
 
 .plan.featured{
-border-color:var(--orange);
+    border-color:var(--orange);
 }
 
 .badge{
-display:inline-block;
-background:rgba(247,147,26,.1);
-color:var(--orange);
-border:1px solid rgba(247,147,26,.25);
-border-radius:20px;
-padding:5px 10px;
-font-size:11px;
-margin-bottom:15px;
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    color:var(--orange);
+    background:rgba(247,147,26,.1);
+    border:1px solid rgba(247,147,26,.25);
+    font-size:11px;
+    margin-bottom:15px;
 }
 
 .plan h2{
-font-size:23px;
-margin-bottom:5px;
+    font-size:23px;
+    margin-bottom:6px;
 }
 
 .cycle{
-color:var(--muted);
-font-size:13px;
-margin-bottom:20px;
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:20px;
 }
 
 .amount{
-font-size:35px;
-font-weight:bold;
-margin-bottom:18px;
+    font-size:35px;
+    font-weight:bold;
+    margin-bottom:18px;
 }
 
 .projected{
-background:#0b111a;
-border:1px solid var(--border);
-border-radius:10px;
-padding:15px;
-margin-bottom:20px;
+    background:#0b111a;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:20px;
 }
 
 .projected small{
-display:block;
-color:var(--muted);
-margin-bottom:5px;
+    display:block;
+    color:var(--muted);
+    margin-bottom:5px;
 }
 
 .projected strong{
-color:var(--green);
-font-size:22px;
+    color:var(--green);
+    font-size:22px;
 }
 
 ul{
-list-style:none;
-margin-bottom:25px;
+    list-style:none;
+    margin-bottom:25px;
 }
 
 li{
-color:#cbd3df;
-font-size:13px;
-padding:8px 0;
-border-bottom:1px solid #1b2531;
+    color:#cbd3df;
+    font-size:13px;
+    padding:8px 0;
+    border-bottom:1px solid #1b2531;
 }
 
 li::before{
-content:"✓";
-color:var(--green);
-margin-right:8px;
+    content:"✓";
+    color:var(--green);
+    margin-right:8px;
 }
 
 .invest{
-width:100%;
-padding:13px;
-border:0;
-border-radius:8px;
-background:var(--orange);
-color:#111;
-font-weight:bold;
-cursor:pointer;
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:8px;
+    background:var(--orange);
+    color:#111;
+    font-weight:bold;
+    cursor:pointer;
 }
 
 .invest:disabled{
-opacity:.5;
-cursor:not-allowed;
+    opacity:.55;
+    cursor:not-allowed;
 }
 
 .message{
-display:none;
-margin:25px auto 0;
-max-width:600px;
-padding:14px;
-border-radius:9px;
-text-align:center;
-font-size:13px;
+    display:none;
+    max-width:650px;
+    margin:25px auto 0;
+    padding:15px;
+    border-radius:9px;
+    text-align:center;
+    font-size:13px;
+    line-height:1.5;
 }
 
 .success{
-display:block;
-background:rgba(37,214,149,.08);
-border:1px solid rgba(37,214,149,.25);
-color:var(--green);
+    display:block;
+    background:rgba(37,214,149,.08);
+    border:1px solid rgba(37,214,149,.25);
+    color:var(--green);
 }
 
 .error{
-display:block;
-background:rgba(255,92,92,.08);
-border:1px solid rgba(255,92,92,.25);
-color:var(--red);
+    display:block;
+    background:rgba(255,92,92,.08);
+    border:1px solid rgba(255,92,92,.25);
+    color:var(--red);
 }
 
 @media(max-width:850px){
-.plans{
-grid-template-columns:1fr;
-max-width:550px;
-margin:auto;
-}
+    .plans{
+        grid-template-columns:1fr;
+        max-width:550px;
+        margin:auto;
+    }
 }
 
 @media(max-width:500px){
-.hero h1{
-font-size:32px;
-}
+    .hero h1{
+        font-size:32px;
+    }
+
+    .nav-links{
+        display:none;
+    }
 }
 </style>
 </head>
@@ -249,19 +264,21 @@ font-size:32px;
 <body>
 
 <header>
+
 <div class="nav">
 
 <a href="dashboard.html" class="logo">
-<div class="logo-icon">₿</div>
-BTC INVEST
+    <div class="logo-icon">₿</div>
+    BTC INVEST
 </a>
 
-<div>
-<a href="dashboard.html">Dashboard</a>
-<a href="login.html">Login</a>
+<div class="nav-links">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="deposit.html">Deposit</a>
 </div>
 
 </div>
+
 </header>
 
 <main>
@@ -273,20 +290,21 @@ Investment <span>Plans</span>
 </h1>
 
 <p>
-Select a plan to allocate funds from your
-demo available balance into an active
-investment.
+Choose an investment plan for your demonstration
+portfolio.
 </p>
 
 </div>
 
 <div class="demo-notice">
 <strong>Demo Account:</strong>
-All balances and projected values on this
-page are simulated for demonstration purposes.
+Investment balances and projected values on this page
+are simulated and are not real financial transactions.
 </div>
 
+
 <div class="plans">
+
 
 <!-- STARTER -->
 
@@ -324,9 +342,10 @@ class="invest"
 data-plan="Starter"
 data-amount="300"
 data-cycle="3"
-data-projected="5000"
->
+data-projected="5000">
+
 Invest $300
+
 </button>
 
 </div>
@@ -368,9 +387,10 @@ class="invest"
 data-plan="Advanced"
 data-amount="500"
 data-cycle="3"
-data-projected="7500"
->
+data-projected="7500">
+
 Invest $500
+
 </button>
 
 </div>
@@ -412,9 +432,10 @@ class="invest"
 data-plan="Professional"
 data-amount="1000"
 data-cycle="3"
-data-projected="15000"
->
+data-projected="15000">
+
 Invest $1,000
+
 </button>
 
 </div>
@@ -429,18 +450,10 @@ Invest $1,000
 
 <script>
 
-/* =====================================================
-   DEMO INVESTMENT STORAGE
-===================================================== */
-
-const STORAGE_KEY = "btc_demo_account_v1";
+const STORAGE_KEY = "btc_demo_investment";
 
 
-/* =====================================================
-   GET ACCOUNT
-===================================================== */
-
-function getAccount(){
+function getDemoAccount(){
 
     const saved =
         localStorage.getItem(STORAGE_KEY);
@@ -448,40 +461,28 @@ function getAccount(){
     if(saved){
 
         try{
-
             return JSON.parse(saved);
-
-        }catch(error){
-
-            console.error(error);
-
+        }
+        catch(e){
+            console.error(e);
         }
 
     }
 
-
-    /*
-      Demo starting balance.
-      Change this only for your demonstration.
-    */
-
     return {
-        available: 6000,
-        activeInvestment: 0,
-        planName: "",
-        cycle: 0,
-        projectedValue: 0,
-        projectedProfit: 0,
-        investedAt: null
+        availableUSD:6000,
+        activeInvestmentUSD:0,
+        planName:"",
+        cycle:0,
+        projectedValueUSD:0,
+        projectedProfitUSD:0,
+        status:"none",
+        investedAt:null
     };
 }
 
 
-/* =====================================================
-   SAVE ACCOUNT
-===================================================== */
-
-function saveAccount(account){
+function saveDemoAccount(account){
 
     localStorage.setItem(
         STORAGE_KEY,
@@ -491,62 +492,49 @@ function saveAccount(account){
 }
 
 
-/* =====================================================
-   MESSAGE
-===================================================== */
-
 function showMessage(text,type){
 
-    const message =
+    const box =
         document.getElementById("message");
 
-    message.textContent = text;
+    box.textContent = text;
 
-    message.className =
+    box.className =
         "message " + type;
 
 }
 
 
-/* =====================================================
-   INVEST BUTTONS
-===================================================== */
-
 document
 .querySelectorAll(".invest")
 .forEach(button => {
 
-    button.addEventListener("click", function(){
+    button.addEventListener("click",function(){
 
         const account =
-            getAccount();
-
+            getDemoAccount();
 
         const amount =
             Number(this.dataset.amount);
 
-
         const plan =
             this.dataset.plan;
 
-
         const cycle =
             Number(this.dataset.cycle);
-
 
         const projected =
             Number(this.dataset.projected);
 
 
-        /* Prevent investing twice
-           while another demo investment
-           is active.
-        */
+        /*
+         * Prevent another active demo investment.
+         */
 
-        if(account.activeInvestment > 0){
+        if(account.activeInvestmentUSD > 0){
 
             showMessage(
-                "You already have an active demo investment. Complete or reset it before starting another one.",
+                "You already have an active demo investment.",
                 "error"
             );
 
@@ -554,9 +542,11 @@ document
         }
 
 
-        /* Check balance */
+        /*
+         * Check available demo balance.
+         */
 
-        if(account.available < amount){
+        if(account.availableUSD < amount){
 
             showMessage(
                 "Insufficient available demo balance.",
@@ -567,72 +557,57 @@ document
         }
 
 
-        /* =================================================
-           MOVE MONEY
-        ================================================= */
+        /*
+         * Move the amount from
+         * available balance into
+         * active investment.
+         */
 
-        account.available =
-            account.available - amount;
+        account.availableUSD -= amount;
 
+        account.activeInvestmentUSD = amount;
 
-        account.activeInvestment =
-            amount;
+        account.planName = plan;
 
+        account.cycle = cycle;
 
-        account.planName =
-            plan;
+        account.projectedValueUSD = projected;
 
-
-        account.cycle =
-            cycle;
-
-
-        account.projectedValue =
-            projected;
-
-
-        account.projectedProfit =
+        account.projectedProfitUSD =
             projected - amount;
 
+        account.status = "active";
 
         account.investedAt =
             new Date().toISOString();
 
 
-        /* Save */
+        saveDemoAccount(account);
 
-        saveAccount(account);
-
-
-        /* Disable buttons */
 
         document
         .querySelectorAll(".invest")
         .forEach(btn => {
-
             btn.disabled = true;
-
         });
 
 
         showMessage(
             plan +
-            " selected successfully. " +
+            " investment created successfully. " +
             "$" +
             amount.toLocaleString() +
-            " has moved from Available Balance to Active Investment in this demo.",
+            " moved into Active Investment.",
             "success"
         );
 
-
-        /* Go dashboard */
 
         setTimeout(() => {
 
             window.location.href =
                 "dashboard.html";
 
-        }, 900);
+        },800);
 
     });
 
