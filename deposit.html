@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BTC Deposit | BTC Invest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        :root {
+            --orange: #f7931a;
+            --dark: #070b12;
+            --card: #10131a;
+            --border: #292d35;
+            --muted: #8c929d;
+            --green: #25d695;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #070707;
+            color: white;
+        }
+
+        header {
+            border-bottom: 1px solid #1d1f24;
+            background: #080808;
+        }
+
+        .nav {
+            max-width: 1100px;
+            min-height: 70px;
+            margin: auto;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+            background: var(--orange);
+            color: #111;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .back {
+            color: #bfc3ca;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back:hover {
+            color: var(--orange);
+        }
+
+        .page {
+            max-width: 800px;
+            margin: auto;
+            padding: 45px 20px 70px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .title-icon {
+            width: 52px;
+            height: 52px;
+
+            margin: 0 auto 12px;
+
+            border-radius: 50%;
+            background: var(--orange);
+            color: #111;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 31px;
+            font-weight: bold;
+        }
+
+        .title h1 {
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .title p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .deposit-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 30px;
+        }
+
+        /* NETWORK */
+
+        .network {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+
+            margin-bottom: 30px;
+
+            font-size: 17px;
+        }
+
+        .network-label {
+            color: var(--muted);
+        }
+
+        .network-value {
+            color: white;
+            font-weight: bold;
+        }
+
+        /* QR */
+
+        .qr-container {
+            width: 285px;
+            height: 285px;
+
+            margin: 0 auto 30px;
+
+            background: white;
+
+            border-radius: 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 16px;
+
+            position: relative;
+        }
+
+        .qr-container img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+        }
+
+        .qr-placeholder {
+            width: 100%;
+            height: 100%;
+
+            color: #111;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        /* ADDRESS */
+
+        .address-box {
+            background: #1d1f25;
+            border-radius: 15px;
+
+            padding: 20px;
+
+            margin-bottom: 25px;
+        }
+
+        .address-label {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 9px;
+        }
+
+        .address-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .address {
+            flex: 1;
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            flex-shrink: 0;
+
+            border: 1px solid #41454d;
+
+            background: transparent;
+            color: white;
+
+            padding: 11px 16px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .copy-btn:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+        }
+
+        /* DETAILS */
+
+        .details {
+            margin-top: 25px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid #24272e;
+
+            font-size: 14px;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: var(--muted);
+        }
+
+        .detail-value {
+            color: white;
+            text-align: right;
+        }
+
+        /* WARNING */
+
+        .warning {
+            margin-top: 25px;
+
+            padding: 17px;
+
+            border-radius: 11px;
+
+            background: rgba(247,147,26,.06);
+
+            border: 1px solid rgba(247,147,26,.2);
+
+            color: #b9bec7;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        .warning strong {
+            color: var(--orange);
+        }
+
+        /* ACTIONS */
+
+        .actions {
+            display: flex;
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .btn-orange {
+            background: var(--orange);
+            color: #111;
+        }
+
+        .btn-dark {
+            background: #15171c;
+            color: white;
+
+            border: 1px solid var(--border);
+        }
+
+        /* COPY MESSAGE */
+
+        #copyMessage {
+            display: none;
+
+            text-align: center;
+
+            margin-top: 12px;
+
+            color: var(--green);
+
+            font-size: 13px;
+        }
+
+        footer {
+            border-top: 1px solid #1d1f24;
+
+            padding: 30px 20px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+
+            .page {
+                padding: 30px 15px 50px;
+            }
+
+            .deposit-card {
+                padding: 20px 15px;
+            }
+
+            .qr-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .address-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .copy-btn {
+                width: 100%;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .detail-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .detail-value {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="nav">
+
+        <a href="dashboard.html" class="logo">
+
+            <div class="logo-icon">
+                ₿
+            </div>
+
+            BTC INVEST
+
+        </a>
+
+        <a href="dashboard.html" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="page">
+
+    <div class="title">
+
+        <div class="title-icon">
+            ₿
+        </div>
+
+        <h1>
+            BTC Deposit
+        </h1>
+
+        <p>
+            Send Bitcoin to the receiving address below.
+        </p>
+
+    </div>
+
+
+    <div class="deposit-card">
+
+
+        <!-- NETWORK -->
+
+        <div class="network">
+
+            <span class="network-label">
+                Network:
+            </span>
+
+            <span class="network-value">
+                BTC
+            </span>
+
+        </div>
+
+
+        <!-- QR CODE -->
+
+        <div class="qr-container">
+
+            <!--
+                Replace the placeholder below with your QR image.
+
+                Example:
+
+                <img src="btc-qr.png" alt="Bitcoin Deposit QR Code">
+            -->
+
+            <div class="qr-placeholder">
+
+                BTC<br>
+                QR CODE
+
+            </div>
+
+        </div>
+
+
+        <!-- ADDRESS -->
+
+        <div class="address-box">
+
+            <div class="address-label">
+                Bitcoin Wallet Address
+            </div>
+
+            <div class="address-row">
+
+                <div
+                    class="address"
+                    id="btcAddress"
+                >
+                    15yA18HJkSdxr7nsfZXonnHRWaosVGcV7d
+                </div>
+
+                <button
+                    class="copy-btn"
+                    onclick="copyAddress()"
+                >
+                    Copy Address
+                </button>
+
+            </div>
+
+            <div id="copyMessage">
+                BTC address copied.
+            </div>
+
+        </div>
+
+
+        <!-- DETAILS -->
+
+        <div class="details">
+
+            <div class="detail-row">
+
+                <span class="detail-label">
+                    Minimum Deposit
+                </span>
+
+                <span class="detail-value">
+                    0.0001 BTC
+                </span>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span class="detail-label">
+                    Network
+                </span>
+
+                <span class="detail-value">
+                    Bitcoin (BTC)
+                </span>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span class="detail-label">
+                    Deposit Confirmation
+                </span>
+
+                <span class="detail-value">
+                    Blockchain confirmation required
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- WARNING -->
+
+        <div class="warning">
+
+            <strong>Important:</strong>
+
+            Only send BTC to this address using the
+            Bitcoin network. Always verify the address
+            carefully before sending. Sending another
+            cryptocurrency or using another network may
+            result in permanent loss of funds.
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+            <a
+                href="dashboard.html"
+                class="btn btn-dark"
+            >
+                Back to Dashboard
+            </a>
+
+            <a
+                href="plans.html"
+                class="btn btn-orange"
+            >
+                View Investment Plans
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    © 2026 BTC INVEST. All rights reserved.
+
+</footer>
+
+
+<script>
+
+    function copyAddress() {
+
+        const address =
+            document.getElementById("btcAddress").innerText.trim();
+
+        navigator.clipboard.writeText(address)
+            .then(function() {
+
+                const message =
+                    document.getElementById("copyMessage");
+
+                message.style.display = "block";
+
+                setTimeout(function() {
+                    message.style.display = "none";
+                }, 2500);
+
+            })
+            .catch(function() {
+
+                alert(
+                    "Unable to copy automatically. " +
+                    "Please copy the address manually."
+                );
+
+            });
+    }
+
+</script>
+
+</body>
+</html>
