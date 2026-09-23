@@ -20,7 +20,6 @@
             --card: #101722;
             --border: #202b3a;
             --muted: #9ba7b7;
-            --green: #25d695;
         }
 
         body {
@@ -31,22 +30,22 @@
                     rgba(247,147,26,.10),
                     transparent 35%
                 ),
-                #070b12;
+                var(--dark);
 
             color: white;
+
+            display: flex;
+            flex-direction: column;
         }
 
-        /* HEADER */
-
         header {
-            background: rgba(7,11,18,.96);
             border-bottom: 1px solid var(--border);
+            background: rgba(7,11,18,.97);
         }
 
         .nav {
-            max-width: 1200px;
-            min-height: 75px;
-
+            max-width: 1100px;
+            min-height: 70px;
             margin: auto;
             padding: 0 20px;
 
@@ -63,13 +62,13 @@
             color: white;
             text-decoration: none;
 
-            font-size: 22px;
+            font-size: 21px;
             font-weight: bold;
         }
 
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 39px;
+            height: 39px;
 
             border-radius: 50%;
 
@@ -80,57 +79,46 @@
             align-items: center;
             justify-content: center;
 
-            font-size: 24px;
+            font-size: 23px;
             font-weight: bold;
         }
 
-        .back {
+        .home {
             color: #cbd3df;
             text-decoration: none;
             font-size: 14px;
         }
 
-        .back:hover {
+        .home:hover {
             color: var(--orange);
         }
 
-        /* LOGIN AREA */
-
-        .page {
-            min-height: calc(100vh - 75px);
+        main {
+            flex: 1;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            padding: 60px 20px;
+            padding: 45px 20px;
         }
 
         .login-card {
             width: 100%;
-            max-width: 450px;
+            max-width: 440px;
 
-            background: rgba(16,23,34,.97);
+            background: var(--card);
 
             border: 1px solid var(--border);
+
             border-radius: 18px;
 
-            padding: 40px;
-
-            box-shadow:
-                0 25px 80px rgba(0,0,0,.35);
+            padding: 35px;
         }
 
-        /* TITLE */
-
-        .title {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .btc-symbol {
-            width: 62px;
-            height: 62px;
+        .icon {
+            width: 58px;
+            height: 58px;
 
             margin: 0 auto 18px;
 
@@ -143,30 +131,36 @@
             align-items: center;
             justify-content: center;
 
-            font-size: 36px;
+            font-size: 30px;
             font-weight: bold;
         }
 
-        .title h1 {
-            font-size: 32px;
+        h1 {
+            text-align: center;
+
+            font-size: 28px;
+
             margin-bottom: 8px;
         }
 
-        .title p {
+        .subtitle {
+            text-align: center;
+
             color: var(--muted);
-            font-size: 14px;
+
+            font-size: 13px;
+
+            margin-bottom: 28px;
         }
 
-        /* FORM */
-
         .field {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         label {
             display: block;
 
-            color: #d7dee8;
+            color: #d8dee7;
 
             font-size: 13px;
             font-weight: bold;
@@ -177,13 +171,15 @@
         input {
             width: 100%;
 
-            padding: 14px 15px;
+            padding: 14px;
 
             background: #0b111a;
-            color: white;
 
             border: 1px solid var(--border);
+
             border-radius: 9px;
+
+            color: white;
 
             outline: none;
 
@@ -197,68 +193,65 @@
                 0 0 0 3px rgba(247,147,26,.08);
         }
 
-        .password-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            margin-bottom: 8px;
-        }
-
-        .password-row label {
-            margin-bottom: 0;
-        }
-
-        .forgot {
-            color: var(--orange);
-
-            text-decoration: none;
-
-            font-size: 12px;
-        }
-
-        .forgot:hover {
-            text-decoration: underline;
-        }
-
-        /* BUTTON */
-
-        .submit {
+        .login-btn {
             width: 100%;
 
             padding: 14px;
 
+            margin-top: 5px;
+
             border: none;
+
             border-radius: 9px;
 
             background: var(--orange);
+
             color: #111;
 
-            font-size: 15px;
+            font-size: 14px;
+
             font-weight: bold;
 
             cursor: pointer;
-
-            margin-top: 5px;
         }
 
-        .submit:hover {
+        .login-btn:hover {
             opacity: .9;
         }
 
-        /* REGISTER */
+        .message {
+            display: none;
 
-        .register-text {
+            margin-top: 16px;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            background: rgba(247,147,26,.08);
+
+            border: 1px solid rgba(247,147,26,.2);
+
+            color: #d9dee6;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            text-align: center;
+        }
+
+        .register {
             text-align: center;
 
-            margin-top: 25px;
+            margin-top: 22px;
 
             color: var(--muted);
 
-            font-size: 14px;
+            font-size: 13px;
         }
 
-        .register-text a {
+        .register a {
             color: var(--orange);
 
             text-decoration: none;
@@ -266,73 +259,47 @@
             font-weight: bold;
         }
 
-        .register-text a:hover {
-            text-decoration: underline;
-        }
+        .demo-note {
+            margin-top: 20px;
 
-        /* NOTICE */
+            padding: 12px;
 
-        .notice {
-            margin-top: 22px;
+            border-radius: 8px;
 
-            padding: 13px;
+            background: #0b111a;
 
-            border-radius: 9px;
-
-            background: rgba(37,214,149,.06);
-
-            border: 1px solid rgba(37,214,149,.18);
+            border: 1px solid var(--border);
 
             color: var(--muted);
 
-            font-size: 12px;
+            font-size: 11px;
 
             line-height: 1.5;
+
+            text-align: center;
         }
 
-        /* FOOTER */
-
         footer {
+            border-top: 1px solid var(--border);
+
+            padding: 25px;
+
             text-align: center;
 
-            padding: 25px 20px;
-
             color: var(--muted);
-
-            border-top: 1px solid var(--border);
 
             font-size: 12px;
         }
 
-        /* MOBILE */
-
-        @media (max-width: 550px) {
-
+        @media (max-width: 500px) {
             .login-card {
-                padding: 28px 20px;
-            }
-
-            .title h1 {
-                font-size: 27px;
-            }
-
-            .logo {
-                font-size: 19px;
-            }
-
-            .logo-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 21px;
+                padding: 25px 18px;
             }
         }
     </style>
 </head>
 
 <body>
-
-
-<!-- HEADER -->
 
 <header>
 
@@ -348,8 +315,8 @@
 
         </a>
 
-        <a href="index.html" class="back">
-            ← Back to Home
+        <a href="index.html" class="home">
+            ← Home
         </a>
 
     </div>
@@ -357,34 +324,24 @@
 </header>
 
 
-<!-- LOGIN -->
-
-<main class="page">
+<main>
 
     <div class="login-card">
 
-
-        <div class="title">
-
-            <div class="btc-symbol">
-                ₿
-            </div>
-
-            <h1>
-                Welcome Back
-            </h1>
-
-            <p>
-                Sign in to access your BTC Invest account.
-            </p>
-
+        <div class="icon">
+            ₿
         </div>
+
+        <h1>
+            Welcome Back
+        </h1>
+
+        <p class="subtitle">
+            Sign in to access your BTC Invest dashboard.
+        </p>
 
 
         <form id="loginForm">
-
-
-            <!-- EMAIL -->
 
             <div class="field">
 
@@ -395,48 +352,32 @@
                 <input
                     type="email"
                     id="email"
-                    name="email"
-                    placeholder="you@example.com"
-                    autocomplete="email"
+                    placeholder="Enter your email"
                     required
                 >
 
             </div>
 
 
-            <!-- PASSWORD -->
-
             <div class="field">
 
-                <div class="password-row">
-
-                    <label for="password">
-                        Password
-                    </label>
-
-                    <a href="#" class="forgot">
-                        Forgot password?
-                    </a>
-
-                </div>
+                <label for="password">
+                    Password
+                </label>
 
                 <input
                     type="password"
                     id="password"
-                    name="password"
                     placeholder="Enter your password"
-                    autocomplete="current-password"
                     required
                 >
 
             </div>
 
 
-            <!-- LOGIN BUTTON -->
-
             <button
                 type="submit"
-                class="submit"
+                class="login-btn"
             >
                 Login
             </button>
@@ -444,9 +385,15 @@
         </form>
 
 
-        <!-- REGISTER -->
+        <div
+            class="message"
+            id="message"
+        >
+            Login submitted. Opening your dashboard...
+        </div>
 
-        <div class="register-text">
+
+        <div class="register">
 
             Don't have an account?
 
@@ -457,24 +404,18 @@
         </div>
 
 
-        <!-- NOTICE -->
+        <div class="demo-note">
 
-        <div class="notice">
-
-            <strong>Demo interface:</strong>
-            This login page is currently a front-end interface.
-            A secure server-side authentication system must be
-            connected before it can handle real user accounts.
+            Demo front-end only. This form does not store or
+            authenticate passwords. A real login system requires
+            a secure backend and password hashing.
 
         </div>
-
 
     </div>
 
 </main>
 
-
-<!-- FOOTER -->
 
 <footer>
 
@@ -485,26 +426,31 @@
 
 <script>
 
-    const loginForm =
-        document.getElementById("loginForm");
-
-    loginForm.addEventListener(
-        "submit",
-        function(event) {
+    document
+        .getElementById("loginForm")
+        .addEventListener("submit", function(event) {
 
             event.preventDefault();
 
-            alert(
-                "Login interface is working. " +
-                "A secure backend is required " +
-                "to authenticate real accounts."
-            );
+            const message =
+                document.getElementById("message");
 
-        }
-    );
+            message.style.display = "block";
+
+            /*
+             * Demo navigation only.
+             * No password or account information is stored.
+             */
+
+            setTimeout(function() {
+
+                window.location.href = "dashboard.html";
+
+            }, 800);
+
+        });
 
 </script>
-
 
 </body>
 </html>
