@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Dashboard | BTC Invest</title>
 
 <style>
@@ -334,12 +335,6 @@ main{
     line-height:1.5;
 }
 
-.demo-label{
-    color:var(--orange);
-    font-size:11px;
-    margin-top:5px;
-}
-
 footer{
     text-align:center;
     border-top:1px solid var(--border);
@@ -504,8 +499,8 @@ Available Balance
 $0.00
 </div>
 
-<div class="btc-balance">
-Demo account balance
+<div class="btc-balance" id="btcBalance">
+0.00000000 BTC
 </div>
 
 <div class="balance-actions">
@@ -666,7 +661,7 @@ Status
 </span>
 
 <strong class="green" id="investmentStatus">
-Waiting for Investment
+No Active Investment
 </strong>
 
 </div>
@@ -701,11 +696,11 @@ Recent Transactions
 <div>
 
 <div class="transaction-name" id="transactionName">
-No investment yet
+No investment activity
 </div>
 
 <div class="transaction-date" id="transactionDate">
-Your investment activity will appear here
+Investment activity will appear here
 </div>
 
 </div>
@@ -719,25 +714,13 @@ Your investment activity will appear here
 </div>
 
 <div class="notice">
-
-This is a demonstration account. Investment
-values shown here are simulated.
-
+Investment and account activity will be displayed here.
 </div>
 
 </div>
 
 </div>
 
-
-<div class="notice">
-
-<strong>Demo Account:</strong>
-
-Your selected investment is stored locally in
-this browser for demonstration purposes.
-
-</div>
 
 </main>
 
@@ -755,10 +738,6 @@ this browser for demonstration purposes.
 
 <script>
 
-/* =====================================================
-   SUPABASE AUTH
-===================================================== */
-
 const SUPABASE_URL =
 "https://rikpsvmhtusupnuhgrsf.supabase.co";
 
@@ -772,258 +751,26 @@ window.supabase.createClient(
 );
 
 
-/* =====================================================
-   SAME STORAGE KEY USED BY PLANS.HTML
-===================================================== */
-
-const STORAGE_KEY =
-"btc_demo_investment";
-
-
-/* =====================================================
-   GET DEMO INVESTMENT
-===================================================== */
-
-function getInvestment(){
-
-    const saved =
-        localStorage.getItem(STORAGE_KEY);
-
-    if(!saved){
-
-        return {
-            availableUSD:6000,
-            activeInvestmentUSD:0,
-            planName:"",
-            cycle:0,
-            projectedValueUSD:0,
-            projectedProfitUSD:0,
-            status:"none",
-            investedAt:null
-        };
-
-    }
-
-    try{
-
-        return JSON.parse(saved);
-
-    }catch(error){
-
-        console.error(
-            "Investment data error:",
-            error
-        );
-
-        return {
-            availableUSD:6000,
-            activeInvestmentUSD:0,
-            planName:"",
-            cycle:0,
-            projectedValueUSD:0,
-            projectedProfitUSD:0,
-            status:"none",
-            investedAt:null
-        };
-
-    }
-
-}
-
-
-/* =====================================================
-   FORMAT MONEY
-===================================================== */
-
-function money(value){
-
-    return "$" +
-        Number(value || 0)
-        .toLocaleString(
-            "en-US",
-            {
-                minimumFractionDigits:2,
-                maximumFractionDigits:2
-            }
-        );
-
-}
-
-
-/* =====================================================
-   LOAD INVESTMENT INTO DASHBOARD
-===================================================== */
-
-function loadInvestment(){
-
-    const account =
-        getInvestment();
-
-
-    /* Available balance */
-
-    document
-    .getElementById("availableBalance")
-    .textContent =
-        money(account.availableUSD);
-
-
-    /* Active investment */
-
-    document
-    .getElementById("activeInvestment")
-    .textContent =
-        money(account.activeInvestmentUSD);
-
-
-    /* Projected value */
-
-    document
-    .getElementById("projectedValue")
-    .textContent =
-        money(account.projectedValueUSD);
-
-
-    /* Plan */
-
-    if(account.activeInvestmentUSD > 0){
-
-        document
-        .getElementById("planName")
-        .textContent =
-            account.planName;
-
-
-        document
-        .getElementById("planStatus")
-        .textContent =
-            "● Active";
-
-
-        document
-        .getElementById("investmentAmount")
-        .textContent =
-            money(account.activeInvestmentUSD);
-
-
-        document
-        .getElementById("investmentCycle")
-        .textContent =
-            account.cycle +
-            " Days";
-
-
-        document
-        .getElementById("investmentProjected")
-        .textContent =
-            money(account.projectedValueUSD);
-
-
-        document
-        .getElementById("investmentProfit")
-        .textContent =
-            money(account.projectedProfitUSD);
-
-
-        document
-        .getElementById("investmentStatus")
-        .textContent =
-            "Active";
-
-
-        document
-        .getElementById("transactionName")
-        .textContent =
-            account.planName +
-            " Investment";
-
-
-        document
-        .getElementById("transactionAmount")
-        .textContent =
-            "-" +
-            money(account.activeInvestmentUSD);
-
-
-        if(account.investedAt){
-
-            const date =
-                new Date(
-                    account.investedAt
-                );
-
-            document
-            .getElementById("transactionDate")
-            .textContent =
-                date.toLocaleString();
-
-        }
-
-    }else{
-
-        document
-        .getElementById("planName")
-        .textContent =
-            "No Active Plan";
-
-
-        document
-        .getElementById("planStatus")
-        .textContent =
-            "● Ready";
-
-
-        document
-        .getElementById("investmentAmount")
-        .textContent =
-            "$0.00";
-
-
-        document
-        .getElementById("investmentCycle")
-        .textContent =
-            "—";
-
-
-        document
-        .getElementById("investmentProjected")
-        .textContent =
-            "—";
-
-
-        document
-        .getElementById("investmentProfit")
-        .textContent =
-            "—";
-
-
-        document
-        .getElementById("investmentStatus")
-        .textContent =
-            "Waiting for Investment";
-
-    }
-
-}
-
-
-/* =====================================================
-   CHECK LOGIN
-===================================================== */
+/* =========================================
+   AUTHENTICATION
+========================================= */
 
 async function checkUser(){
 
     const {
         data:{session},
         error
-    } =
-    await supabaseClient.auth.getSession();
+    } = await supabaseClient.auth.getSession();
 
 
     if(error){
 
-        console.error(error);
+        console.error(
+            "Authentication error:",
+            error
+        );
 
+        return;
     }
 
 
@@ -1034,7 +781,6 @@ async function checkUser(){
         );
 
         return;
-
     }
 
 
@@ -1059,15 +805,12 @@ async function checkUser(){
     .textContent =
         "Welcome, " + name;
 
-
-    loadInvestment();
-
 }
 
 
-/* =====================================================
+/* =========================================
    LOGOUT
-===================================================== */
+========================================= */
 
 document
 .getElementById("logoutBtn")
@@ -1097,7 +840,6 @@ document
                 "Logout";
 
             return;
-
         }
 
 
@@ -1109,9 +851,9 @@ document
 );
 
 
-/* =====================================================
+/* =========================================
    START
-===================================================== */
+========================================= */
 
 checkUser();
 
