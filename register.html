@@ -8,9 +8,9 @@
 
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
             font-family: Arial, Helvetica, sans-serif;
         }
 
@@ -21,27 +21,20 @@
             --border: #202b3a;
             --muted: #9ba7b7;
             --green: #25d695;
+            --red: #ff5c5c;
         }
 
         body {
             min-height: 100vh;
-            background:
-                radial-gradient(
-                    circle at top right,
-                    rgba(247,147,26,.10),
-                    transparent 35%
-                ),
-                var(--dark);
-
+            background: #070b12;
             color: white;
-
             display: flex;
             flex-direction: column;
         }
 
         header {
-            background: rgba(7,11,18,.97);
             border-bottom: 1px solid var(--border);
+            background: #070b12;
         }
 
         .nav {
@@ -101,17 +94,16 @@
             align-items: center;
             justify-content: center;
 
-            padding: 45px 20px;
+            padding: 40px 20px;
         }
 
-        .register-card {
+        .card {
             width: 100%;
             max-width: 460px;
 
             background: var(--card);
 
             border: 1px solid var(--border);
-
             border-radius: 18px;
 
             padding: 35px;
@@ -144,13 +136,8 @@
 
         .subtitle {
             text-align: center;
-
             color: var(--muted);
-
             font-size: 13px;
-
-            line-height: 1.5;
-
             margin-bottom: 28px;
         }
 
@@ -160,12 +147,9 @@
 
         label {
             display: block;
-
             color: #d8dee7;
-
             font-size: 13px;
             font-weight: bold;
-
             margin-bottom: 8px;
         }
 
@@ -175,23 +159,17 @@
             padding: 14px;
 
             background: #0b111a;
-
-            border: 1px solid var(--border);
-
-            border-radius: 9px;
-
             color: white;
 
-            outline: none;
+            border: 1px solid var(--border);
+            border-radius: 9px;
 
+            outline: none;
             font-size: 14px;
         }
 
         input:focus {
             border-color: var(--orange);
-
-            box-shadow:
-                0 0 0 3px rgba(247,147,26,.08);
         }
 
         .terms {
@@ -204,7 +182,6 @@
             color: var(--muted);
 
             font-size: 11px;
-
             line-height: 1.5;
         }
 
@@ -213,18 +190,12 @@
             margin-top: 2px;
         }
 
-        .terms a {
-            color: var(--orange);
-            text-decoration: none;
-        }
-
         .register-btn {
             width: 100%;
 
             padding: 14px;
 
             border: none;
-
             border-radius: 9px;
 
             background: var(--orange);
@@ -236,8 +207,9 @@
             cursor: pointer;
         }
 
-        .register-btn:hover {
-            opacity: .9;
+        .register-btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
         }
 
         .message {
@@ -249,71 +221,47 @@
 
             border-radius: 9px;
 
-            background: rgba(37,214,149,.07);
-
-            border: 1px solid rgba(37,214,149,.2);
-
-            color: var(--green);
-
             font-size: 12px;
+            line-height: 1.5;
 
             text-align: center;
+        }
 
-            line-height: 1.5;
+        .success {
+            background: rgba(37,214,149,.08);
+            border: 1px solid rgba(37,214,149,.25);
+            color: var(--green);
+        }
+
+        .error {
+            background: rgba(255,92,92,.08);
+            border: 1px solid rgba(255,92,92,.25);
+            color: var(--red);
         }
 
         .login {
             text-align: center;
-
             margin-top: 22px;
-
             color: var(--muted);
-
             font-size: 13px;
         }
 
         .login a {
             color: var(--orange);
-
             text-decoration: none;
-
             font-weight: bold;
-        }
-
-        .demo-note {
-            margin-top: 20px;
-
-            padding: 12px;
-
-            border-radius: 8px;
-
-            background: #0b111a;
-
-            border: 1px solid var(--border);
-
-            color: var(--muted);
-
-            font-size: 11px;
-
-            line-height: 1.5;
-
-            text-align: center;
         }
 
         footer {
             border-top: 1px solid var(--border);
-
             padding: 25px;
-
             text-align: center;
-
             color: var(--muted);
-
             font-size: 12px;
         }
 
         @media (max-width: 500px) {
-            .register-card {
+            .card {
                 padding: 25px 18px;
             }
         }
@@ -327,13 +275,8 @@
     <div class="nav">
 
         <a href="index.html" class="logo">
-
-            <div class="logo-icon">
-                ₿
-            </div>
-
+            <div class="logo-icon">₿</div>
             BTC INVEST
-
         </a>
 
         <a href="index.html" class="home">
@@ -347,18 +290,14 @@
 
 <main>
 
-    <div class="register-card">
+    <div class="card">
 
-        <div class="icon">
-            ₿
-        </div>
+        <div class="icon">₿</div>
 
-        <h1>
-            Create Account
-        </h1>
+        <h1>Create Account</h1>
 
         <p class="subtitle">
-            Create your BTC Invest account to access the platform.
+            Create your BTC Invest account.
         </p>
 
 
@@ -405,7 +344,7 @@
                 <input
                     type="password"
                     id="password"
-                    placeholder="Create a password"
+                    placeholder="Minimum 8 characters"
                     minlength="8"
                     required
                 >
@@ -422,7 +361,7 @@
                 <input
                     type="password"
                     id="confirmPassword"
-                    placeholder="Confirm your password"
+                    placeholder="Repeat your password"
                     minlength="8"
                     required
                 >
@@ -439,8 +378,7 @@
                 >
 
                 <span>
-                    I confirm that the information provided is accurate
-                    and I agree to the site's terms and conditions.
+                    I agree to the site's terms and conditions.
                 </span>
 
             </label>
@@ -449,6 +387,7 @@
             <button
                 type="submit"
                 class="register-btn"
+                id="registerBtn"
             >
                 Create Account
             </button>
@@ -456,12 +395,9 @@
         </form>
 
 
-        <div
-            class="message"
-            id="message"
-        >
-            Registration submitted. Redirecting to login...
-        </div>
+        <div id="successMessage" class="message success"></div>
+
+        <div id="errorMessage" class="message error"></div>
 
 
         <div class="login">
@@ -474,74 +410,169 @@
 
         </div>
 
-
-        <div class="demo-note">
-
-            Demo front-end only. This page does not store passwords
-            or create a real user account. A production registration
-            system requires a secure backend, database, password
-            hashing, validation, and authentication.
-
-        </div>
-
     </div>
 
 </main>
 
 
 <footer>
-
     © 2026 BTC INVEST. All rights reserved.
-
 </footer>
 
 
+<!-- Supabase -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 
-    document
-        .getElementById("registerForm")
-        .addEventListener("submit", function(event) {
+    const SUPABASE_URL =
+        "https://rikpsvmhtusupnuhgrsf.supabase.co";
 
-            event.preventDefault();
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_7O3mA4KtXSRR6skAKWkgxQ_2c-8BDug";
 
-            const password =
-                document.getElementById("password").value;
-
-            const confirmPassword =
-                document.getElementById("confirmPassword").value;
-
-            const message =
-                document.getElementById("message");
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
+        );
 
 
-            if (password !== confirmPassword) {
+    const form =
+        document.getElementById("registerForm");
 
-                alert("Passwords do not match.");
+    const button =
+        document.getElementById("registerBtn");
 
-                return;
+    const successMessage =
+        document.getElementById("successMessage");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+
+    function showError(message) {
+
+        errorMessage.textContent = message;
+
+        errorMessage.style.display = "block";
+
+        successMessage.style.display = "none";
+    }
+
+
+    function showSuccess(message) {
+
+        successMessage.textContent = message;
+
+        successMessage.style.display = "block";
+
+        errorMessage.style.display = "none";
+    }
+
+
+    form.addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        errorMessage.style.display = "none";
+        successMessage.style.display = "none";
+
+        const name =
+            document.getElementById("name").value.trim();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+
+        if (password !== confirmPassword) {
+
+            showError("Passwords do not match.");
+
+            return;
+        }
+
+
+        if (password.length < 8) {
+
+            showError(
+                "Password must contain at least 8 characters."
+            );
+
+            return;
+        }
+
+
+        button.disabled = true;
+
+        button.textContent = "Creating Account...";
+
+
+        try {
+
+            const { data, error } =
+                await supabaseClient.auth.signUp({
+
+                    email: email,
+
+                    password: password,
+
+                    options: {
+                        data: {
+                            full_name: name
+                        }
+                    }
+
+                });
+
+
+            if (error) {
+                throw error;
             }
 
 
-            if (password.length < 8) {
-
-                alert(
-                    "Password must contain at least 8 characters."
-                );
-
-                return;
-            }
+            showSuccess(
+                "Account created successfully. " +
+                "Check your email if email confirmation is enabled, " +
+                "then log in."
+            );
 
 
-            message.style.display = "block";
+            form.reset();
 
 
             setTimeout(function() {
 
                 window.location.href = "login.html";
 
-            }, 1000);
+            }, 2500);
 
-        });
+
+        } catch (error) {
+
+            console.error(error);
+
+            showError(
+                error.message ||
+                "Unable to create the account."
+            );
+
+        } finally {
+
+            button.disabled = false;
+
+            button.textContent = "Create Account";
+
+        }
+
+    });
 
 </script>
 
