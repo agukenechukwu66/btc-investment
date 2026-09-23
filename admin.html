@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Deposits | BTC Invest</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#070b12;
+    color:white;
+    min-height:100vh;
+}
+
+header{
+    border-bottom:1px solid #202b3a;
+}
+
+.nav{
+    max-width:1200px;
+    min-height:70px;
+    margin:auto;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    color:white;
+    text-decoration:none;
+    font-size:21px;
+    font-weight:bold;
+}
+
+.back{
+    color:#f7931a;
+    text-decoration:none;
+    font-size:14px;
+}
+
+main{
+    max-width:1200px;
+    margin:40px auto;
+    padding:0 20px 60px;
+}
+
+h1{
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#9ba7b7;
+    font-size:13px;
+    margin-bottom:30px;
+}
+
+.card{
+    background:#101722;
+    border:1px solid #202b3a;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.table-wrapper{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:800px;
+}
+
+th{
+    text-align:left;
+    color:#9ba7b7;
+    font-size:12px;
+    padding:16px;
+    border-bottom:1px solid #202b3a;
+}
+
+td{
+    padding:16px;
+    font-size:13px;
+    border-bottom:1px solid #19222e;
+    vertical-align:top;
+}
+
+.tx{
+    max-width:220px;
+    word-break:break-all;
+    color:#f7931a;
+}
+
+.status{
+    font-weight:bold;
+    font-size:12px;
+}
+
+.pending{
+    color:#f7931a;
+}
+
+.approved{
+    color:#25d695;
+}
+
+.rejected{
+    color:#ff5c5c;
+}
+
+.empty{
+    padding:30px;
+    color:#9ba7b7;
+    text-align:center;
+}
+
+.warning{
+    margin-top:20px;
+    padding:15px;
+    border-radius:9px;
+    background:rgba(247,147,26,.06);
+    border:1px solid rgba(247,147,26,.2);
+    color:#c6ced9;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.refresh{
+    margin-bottom:20px;
+    padding:10px 16px;
+    border:1px solid #202b3a;
+    border-radius:8px;
+    background:#151e2b;
+    color:white;
+    cursor:pointer;
+}
+
+.refresh:hover{
+    border-color:#f7931a;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="nav">
+
+<a href="dashboard.html" class="logo">
+₿ BTC INVEST — ADMIN
+</a>
+
+<a href="dashboard.html" class="back">
+← Dashboard
+</a>
+
+</div>
+
+</header>
+
+
+<main>
+
+<h1>Deposit Management</h1>
+
+<p class="subtitle">
+Review deposit submissions before taking any administrative action.
+</p>
+
+<button class="refresh" id="refreshBtn">
+Refresh Deposits
+</button>
+
+
+<div class="card">
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+<th>User</th>
+<th>Amount</th>
+<th>Transaction Hash</th>
+<th>Status</th>
+<th>Date</th>
+</tr>
+
+</thead>
+
+<tbody id="depositTable">
+
+<tr>
+<td colspan="5" class="empty">
+Loading deposits...
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div class="warning">
+
+<strong>Verification:</strong>
+A deposit should only be marked approved after the transaction has
+been independently verified on the Bitcoin network. This page does
+not automatically treat a submitted transaction hash as proof of payment.
+
+</div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+"https://rikpsvmhtusupnuhgrsf.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_7O3mA4KtXSRR6skAKWkgxQ_2c-8BDug";
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
+
+
+async function loadDeposits(){
+
+    const table =
+    document.getElementById("depositTable");
+
+
+    const {
+        data:{
+            session
+        }
+    } =
+    await supabaseClient
+    .auth
+    .getSession();
+
+
+    if(!session){
+
+        window.location.replace(
+            "login.html"
+        );
+
+        return;
+    }
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+    .from("deposits")
+    .select(
+        "id,user_id,amount,tx_hash,status,created_at"
+    )
+    .order(
+        "created_at",
+        {
+            ascending:false
+        }
+    );
+
+
+    if(error){
+
+        console.error(error);
+
+        table.innerHTML = `
+        <tr>
+            <td colspan="5" class="empty">
+                Unable to load deposits.
+            </td>
+        </tr>
+        `;
+
+        return;
+    }
+
+
+    if(!data || data.length === 0){
+
+        table.innerHTML = `
+        <tr>
+            <td colspan="5" class="empty">
+                No deposits found.
+            </td>
+        </tr>
+        `;
+
+        return;
+    }
+
+
+    table.innerHTML = "";
+
+
+    data.forEach(function(deposit){
+
+        const row =
+        document.createElement("tr");
+
+
+        const date =
+        new Date(
+            deposit.created_at
+        ).toLocaleString();
+
+
+        row.innerHTML = `
+
+        <td>
+            ${deposit.user_id}
+        </td>
+
+        <td>
+            <strong>
+                ${deposit.amount} BTC
+            </strong>
+        </td>
+
+        <td class="tx">
+            ${deposit.tx_hash}
+        </td>
+
+        <td>
+            <span class="status ${deposit.status}">
+                ${deposit.status.toUpperCase()}
+            </span>
+        </td>
+
+        <td>
+            ${date}
+        </td>
+
+        `;
+
+
+        table.appendChild(row);
+
+    });
+
+}
+
+
+document
+.getElementById("refreshBtn")
+.addEventListener(
+"click",
+loadDeposits
+);
+
+
+loadDeposits();
+
+</script>
+
+</body>
+</html>
