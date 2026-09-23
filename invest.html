@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start Investment | BTC Invest</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+:root{
+    --orange:#f7931a;
+    --dark:#070b12;
+    --card:#101722;
+    --border:#202b3a;
+    --muted:#9ba7b7;
+    --green:#25d695;
+    --red:#ff5c5c;
+}
+
+body{
+    background:var(--dark);
+    color:white;
+    min-height:100vh;
+}
+
+header{
+    border-bottom:1px solid var(--border);
+}
+
+.nav{
+    max-width:1100px;
+    min-height:70px;
+    margin:auto;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    color:white;
+    text-decoration:none;
+    font-size:21px;
+    font-weight:bold;
+}
+
+.back{
+    color:var(--orange);
+    text-decoration:none;
+    font-size:14px;
+}
+
+main{
+    max-width:650px;
+    margin:40px auto;
+    padding:0 20px 50px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:30px;
+}
+
+h1{
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+.balance{
+    background:#0b111a;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:18px;
+    margin-bottom:25px;
+}
+
+.balance-label{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.balance-value{
+    color:var(--orange);
+    font-size:26px;
+    font-weight:bold;
+    margin-top:6px;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+select,
+input{
+    width:100%;
+    padding:14px;
+    margin-bottom:20px;
+    background:#0b111a;
+    border:1px solid var(--border);
+    border-radius:9px;
+    color:white;
+    outline:none;
+}
+
+select:focus,
+input:focus{
+    border-color:var(--orange);
+}
+
+.plan-info{
+    background:#0b111a;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:17px;
+    margin-bottom:20px;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:8px 0;
+    border-bottom:1px solid #19222e;
+    font-size:13px;
+}
+
+.row:last-child{
+    border-bottom:none;
+}
+
+.row span{
+    color:var(--muted);
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:9px;
+    background:var(--orange);
+    color:#111;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.message{
+    display:none;
+    margin-top:16px;
+    padding:13px;
+    border-radius:8px;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.success{
+    display:block;
+    color:var(--green);
+    background:rgba(37,214,149,.08);
+    border:1px solid rgba(37,214,149,.25);
+}
+
+.error{
+    display:block;
+    color:var(--red);
+    background:rgba(255,92,92,.08);
+    border:1px solid rgba(255,92,92,.25);
+}
+
+.note{
+    margin-top:20px;
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.6;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="nav">
+
+<a href="dashboard.html" class="logo">
+₿ BTC INVEST
+</a>
+
+<a href="dashboard.html" class="back">
+← Dashboard
+</a>
+
+</div>
+
+</header>
+
+
+<main>
+
+<div class="card">
+
+<h1>Start Investment</h1>
+
+<p class="subtitle">
+Select an investment plan and allocate BTC from your verified
+available balance.
+</p>
+
+
+<div class="balance">
+
+<div class="balance-label">
+Available BTC
+</div>
+
+<div class="balance-value" id="availableBalance">
+Loading...
+</div>
+
+</div>
+
+
+<label for="plan">
+Investment Plan
+</label>
+
+<select id="plan">
+
+<option value="">
+Select a plan
+</option>
+
+<option
+value="Basic Plan"
+data-days="3"
+>
+Basic Plan — 3 Days
+</option>
+
+<option
+value="Premium Plan"
+data-days="5"
+>
+Premium Plan — 5 Days
+</option>
+
+</select>
+
+
+<label for="amount">
+Investment Amount (BTC)
+</label>
+
+<input
+type="number"
+id="amount"
+min="0.00000001"
+step="0.00000001"
+placeholder="Example: 0.01"
+>
+
+
+<div class="plan-info">
+
+<div class="row">
+
+<span>
+Selected Plan
+</span>
+
+<strong id="selectedPlan">
+—
+</strong>
+
+</div>
+
+
+<div class="row">
+
+<span>
+Cycle
+</span>
+
+<strong id="cycle">
+—
+</strong>
+
+</div>
+
+
+<div class="row">
+
+<span>
+Amount
+</span>
+
+<strong id="previewAmount">
+0 BTC
+</strong>
+
+</div>
+
+</div>
+
+
+<button id="startBtn">
+Start Investment
+</button>
+
+
+<div id="message"></div>
+
+
+<div class="note">
+
+Investment amounts are transferred from your available
+verified BTC balance to an active investment. Projected
+values are estimates and are not guaranteed returns.
+
+</div>
+
+</div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+/* ============================
+   SUPABASE
+============================ */
+
+const SUPABASE_URL =
+"https://rikpsvmhtusupnuhgrsf.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_7O3mA4KtXSRR6skAKWkgxQ_2c-8BDug";
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
+
+
+/* ============================
+   VARIABLES
+============================ */
+
+let currentUser = null;
+
+let approvedBTC = 0;
+
+let activeBTC = 0;
+
+
+/* ============================
+   MESSAGE
+============================ */
+
+function showMessage(text,type){
+
+    const message =
+    document.getElementById("message");
+
+    message.textContent = text;
+
+    message.className =
+    "message " + type;
+
+}
+
+
+/* ============================
+   CHECK LOGIN
+============================ */
+
+async function checkUser(){
+
+    const {
+        data:{
+            session
+        },
+        error
+    } =
+    await supabaseClient
+    .auth
+    .getSession();
+
+
+    if(error || !session){
+
+        window.location.replace(
+            "login.html"
+        );
+
+        return false;
+    }
+
+
+    currentUser =
+    session.user;
+
+    return true;
+}
+
+
+/* ============================
+   CALCULATE AVAILABLE BTC
+============================ */
+
+async function loadBalance(){
+
+    const {
+        data: deposits,
+        error: depositError
+    } =
+    await supabaseClient
+    .from("deposits")
+    .select("amount,status")
+    .eq(
+        "user_id",
+        currentUser.id
+    );
+
+
+    if(depositError){
+
+        console.error(depositError);
+
+        showMessage(
+            "Unable to load your deposit balance.",
+            "error"
+        );
+
+        return false;
+    }
+
+
+    approvedBTC = 0;
+
+
+    deposits.forEach(function(deposit){
+
+        if(deposit.status === "approved"){
+
+            approvedBTC +=
+            Number(deposit.amount) || 0;
+
+        }
+
+    });
+
+
+    const {
+        data: investments,
+        error: investmentError
+    } =
+    await supabaseClient
+    .from("investments")
+    .select("amount_btc,status")
+    .eq(
+        "user_id",
+        currentUser.id
+    );
+
+
+    if(investmentError){
+
+        console.error(investmentError);
+
+        showMessage(
+            "Unable to load your investments.",
+            "error"
+        );
+
+        return false;
+    }
+
+
+    activeBTC = 0;
+
+
+    investments.forEach(function(investment){
+
+        if(investment.status === "active"){
+
+            activeBTC +=
+            Number(investment.amount_btc) || 0;
+
+        }
+
+    });
+
+
+    const available =
+    Math.max(
+        0,
+        approvedBTC - activeBTC
+    );
+
+
+    document
+    .getElementById("availableBalance")
+    .textContent =
+    available.toFixed(8) +
+    " BTC";
+
+
+    return true;
+}
+
+
+/* ============================
+   PLAN CHANGE
+============================ */
+
+document
+.getElementById("plan")
+.addEventListener(
+"change",
+function(){
+
+    const option =
+    this.options[this.selectedIndex];
+
+    const name =
+    this.value;
+
+    const days =
+    option.dataset.days;
+
+
+    document
+    .getElementById("selectedPlan")
+    .textContent =
+    name || "—";
+
+
+    document
+    .getElementById("cycle")
+    .textContent =
+    days ? days + " Days" : "—";
+
+});
+
+
+/* ============================
+   AMOUNT PREVIEW
+============================ */
+
+document
+.getElementById("amount")
+.addEventListener(
+"input",
+function(){
+
+    const amount =
+    Number(this.value) || 0;
+
+
+    document
+    .getElementById("previewAmount")
+    .textContent =
+    amount.toFixed(8) +
+    " BTC";
+
+});
+
+
+/* ============================
+   START INVESTMENT
+============================ */
+
+document
+.getElementById("startBtn")
+.addEventListener(
+"click",
+async function(){
+
+    const button =
+    this;
+
+
+    showMessage(
+        "",
+        ""
+    );
+
+
+    const plan =
+    document
+    .getElementById("plan")
+    .value;
+
+
+    const amount =
+    Number(
+        document
+        .getElementById("amount")
+        .value
+    );
+
+
+    if(!plan){
+
+        showMessage(
+            "Please select an investment plan.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(!amount || amount <= 0){
+
+        showMessage(
+            "Please enter a valid BTC amount.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    /*
+       Recalculate immediately before
+       creating the investment.
+    */
+
+    const balanceLoaded =
+    await loadBalance();
+
+
+    if(!balanceLoaded){
+
+        return;
+    }
+
+
+    const available =
+    Math.max(
+        0,
+        approvedBTC - activeBTC
+    );
+
+
+    if(amount > available){
+
+        showMessage(
+            "Insufficient available BTC. Only verified approved BTC can be invested.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+    "Starting Investment...";
+
+
+    try{
+
+        const option =
+        document
+        .getElementById("plan")
+        .options[
+            document
+            .getElementById("plan")
+            .selectedIndex
+        ];
+
+
+        const days =
+        Number(
+            option.dataset.days
+        );
+
+
+        const startDate =
+        new Date();
+
+
+        const endDate =
+        new Date(startDate);
+
+
+        endDate.setDate(
+            endDate.getDate() + days
+        );
+
+
+        /*
+           No fabricated profit is inserted here.
+           projected_value and projected_profit
+           start at zero and can be managed
+           separately through your authorized
+           admin workflow.
+        */
+
+        const {
+            error
+        } =
+        await supabaseClient
+        .from("investments")
+        .insert({
+
+            user_id:
+            currentUser.id,
+
+            plan_name:
+            plan,
+
+            amount_btc:
+            amount,
+
+            status:
+            "active",
+
+            projected_value:
+            0,
+
+            projected_profit:
+            0,
+
+            start_date:
+            startDate.toISOString(),
+
+            end_date:
+            endDate.toISOString()
+
+        });
+
+
+        if(error){
+
+            throw error;
+
+        }
+
+
+        showMessage(
+            "Investment started successfully.",
+            "success"
+        );
+
+
+        document
+        .getElementById("amount")
+        .value = "";
+
+
+        document
+        .getElementById("plan")
+        .value = "";
+
+
+        document
+        .getElementById("selectedPlan")
+        .textContent = "—";
+
+
+        document
+        .getElementById("cycle")
+        .textContent = "—";
+
+
+        document
+        .getElementById("previewAmount")
+        .textContent = "0 BTC";
+
+
+        await loadBalance();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showMessage(
+            error.message ||
+            "Unable to start the investment.",
+            "error"
+        );
+
+    }
+
+
+    button.disabled = false;
+
+    button.textContent =
+    "Start Investment";
+
+});
+
+
+/* ============================
+   START PAGE
+============================ */
+
+(async function(){
+
+    const loggedIn =
+    await checkUser();
+
+
+    if(loggedIn){
+
+        await loadBalance();
+
+    }
+
+})();
+
+</script>
+
+</body>
+</html>
