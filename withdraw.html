@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Withdraw BTC | BTC Invest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        :root {
+            --orange: #f7931a;
+            --dark: #070b12;
+            --card: #101722;
+            --border: #202b3a;
+            --muted: #9ba7b7;
+            --green: #25d695;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(247,147,26,.10),
+                    transparent 35%
+                ),
+                #070b12;
+            color: white;
+        }
+
+        header {
+            background: rgba(7,11,18,.97);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            max-width: 1100px;
+            min-height: 72px;
+            margin: auto;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 39px;
+            height: 39px;
+            border-radius: 50%;
+
+            background: var(--orange);
+            color: #111;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .back {
+            color: #cbd3df;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back:hover {
+            color: var(--orange);
+        }
+
+        .page {
+            max-width: 650px;
+            margin: auto;
+            padding: 55px 20px 70px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title-icon {
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+            background: var(--orange);
+            color: #111;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .title h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .card {
+            background: rgba(16,23,34,.97);
+
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            padding: 30px;
+        }
+
+        .balance {
+            background: #0b111a;
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            margin-bottom: 25px;
+        }
+
+        .balance-label {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .balance-value {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .balance-btc {
+            color: var(--orange);
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+
+            color: #d7dee8;
+            font-size: 13px;
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+
+            padding: 14px 15px;
+
+            background: #0b111a;
+            color: white;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--orange);
+
+            box-shadow:
+                0 0 0 3px rgba(247,147,26,.08);
+        }
+
+        .hint {
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 7px;
+        }
+
+        .submit {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 9px;
+
+            background: var(--orange);
+            color: #111;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            opacity: .9;
+        }
+
+        .notice {
+            margin-top: 22px;
+
+            padding: 15px;
+
+            background: rgba(247,147,26,.06);
+
+            border: 1px solid rgba(247,147,26,.18);
+
+            border-radius: 10px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .success {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            background: rgba(37,214,149,.07);
+
+            border: 1px solid rgba(37,214,149,.2);
+
+            border-radius: 10px;
+
+            color: var(--green);
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+
+            padding: 13px;
+
+            border-radius: 9px;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .btn-dark {
+            background: #151e2b;
+            color: white;
+
+            border: 1px solid var(--border);
+        }
+
+        .btn-dark:hover {
+            border-color: var(--orange);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+
+            text-align: center;
+
+            padding: 25px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        @media (max-width: 550px) {
+            .card {
+                padding: 22px 17px;
+            }
+
+            .title h1 {
+                font-size: 26px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="nav">
+
+        <a href="dashboard.html" class="logo">
+
+            <div class="logo-icon">₿</div>
+
+            BTC INVEST
+
+        </a>
+
+        <a href="dashboard.html" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="page">
+
+    <div class="title">
+
+        <div class="title-icon">₿</div>
+
+        <h1>Withdraw BTC</h1>
+
+        <p>
+            Submit a Bitcoin withdrawal request.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <!-- AVAILABLE BALANCE -->
+
+        <div class="balance">
+
+            <div class="balance-label">
+                Available Balance
+            </div>
+
+            <div class="balance-value">
+                $0.00
+            </div>
+
+            <div class="balance-btc">
+                0.00000000 BTC
+            </div>
+
+        </div>
+
+
+        <form id="withdrawForm">
+
+            <!-- AMOUNT -->
+
+            <div class="field">
+
+                <label for="amount">
+                    Withdrawal Amount (BTC)
+                </label>
+
+                <input
+                    type="number"
+                    id="amount"
+                    name="amount"
+                    placeholder="0.00000000"
+                    min="0"
+                    step="0.00000001"
+                    required
+                >
+
+                <div class="hint">
+                    Enter the amount of BTC you want to withdraw.
+                </div>
+
+            </div>
+
+
+            <!-- ADDRESS -->
+
+            <div class="field">
+
+                <label for="address">
+                    Bitcoin Receiving Address
+                </label>
+
+                <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    placeholder="Enter your BTC address"
+                    required
+                >
+
+                <div class="hint">
+                    Carefully verify the receiving address before submitting.
+                </div>
+
+            </div>
+
+
+            <!-- NETWORK -->
+
+            <div class="field">
+
+                <label for="network">
+                    Network
+                </label>
+
+                <select id="network" name="network" required>
+
+                    <option value="BTC">
+                        Bitcoin Network (BTC)
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                class="submit"
+            >
+                Submit Withdrawal Request
+            </button>
+
+        </form>
+
+
+        <div
+            class="success"
+            id="successMessage"
+        >
+            Your withdrawal request has been recorded as a
+            front-end demonstration. No funds have been transferred.
+            A secure backend and transaction verification are required
+            for real withdrawals.
+        </div>
+
+
+        <div class="notice">
+
+            <strong>Important:</strong>
+            Bitcoin transactions are irreversible. Always verify
+            the destination address and network before sending.
+            Real withdrawals should only be processed by a secure
+            backend after the user's available balance and
+            transaction status have been independently verified.
+
+        </div>
+
+
+        <div class="actions">
+
+            <a
+                href="dashboard.html"
+                class="btn btn-dark"
+            >
+                Back to Dashboard
+            </a>
+
+            <a
+                href="deposit.html"
+                class="btn btn-dark"
+            >
+                Deposit BTC
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    © 2026 BTC INVEST. All rights reserved.
+
+</footer>
+
+
+<script>
+
+    const form =
+        document.getElementById("withdrawForm");
+
+    const successMessage =
+        document.getElementById("successMessage");
+
+    form.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const amount =
+            document.getElementById("amount").value;
+
+        const address =
+            document.getElementById("address").value.trim();
+
+        if (!amount || Number(amount) <= 0) {
+
+            alert("Please enter a valid BTC amount.");
+
+            return;
+        }
+
+        if (!address) {
+
+            alert("Please enter a Bitcoin receiving address.");
+
+            return;
+        }
+
+        successMessage.style.display = "block";
+
+        form.reset();
+
+        successMessage.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
