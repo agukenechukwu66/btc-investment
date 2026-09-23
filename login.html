@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Login | BTC Invest</title>
 
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
             font-family: Arial, Helvetica, sans-serif;
         }
 
@@ -20,27 +19,19 @@
             --card: #101722;
             --border: #202b3a;
             --muted: #9ba7b7;
+            --red: #ff5c5c;
         }
 
         body {
             min-height: 100vh;
-            background:
-                radial-gradient(
-                    circle at top right,
-                    rgba(247,147,26,.10),
-                    transparent 35%
-                ),
-                var(--dark);
-
+            background: #070b12;
             color: white;
-
             display: flex;
             flex-direction: column;
         }
 
         header {
             border-bottom: 1px solid var(--border);
-            background: rgba(7,11,18,.97);
         }
 
         .nav {
@@ -48,7 +39,6 @@
             min-height: 70px;
             margin: auto;
             padding: 0 20px;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -58,10 +48,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
-
             color: white;
             text-decoration: none;
-
             font-size: 21px;
             font-weight: bold;
         }
@@ -69,16 +57,12 @@
         .logo-icon {
             width: 39px;
             height: 39px;
-
             border-radius: 50%;
-
             background: var(--orange);
             color: #111;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             font-size: 23px;
             font-weight: bold;
         }
@@ -89,67 +73,47 @@
             font-size: 14px;
         }
 
-        .home:hover {
-            color: var(--orange);
-        }
-
         main {
             flex: 1;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
-            padding: 45px 20px;
+            padding: 40px 20px;
         }
 
-        .login-card {
+        .card {
             width: 100%;
             max-width: 440px;
-
             background: var(--card);
-
             border: 1px solid var(--border);
-
             border-radius: 18px;
-
             padding: 35px;
         }
 
         .icon {
             width: 58px;
             height: 58px;
-
             margin: 0 auto 18px;
-
             border-radius: 50%;
-
             background: var(--orange);
             color: #111;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             font-size: 30px;
             font-weight: bold;
         }
 
         h1 {
             text-align: center;
-
             font-size: 28px;
-
             margin-bottom: 8px;
         }
 
         .subtitle {
             text-align: center;
-
             color: var(--muted);
-
             font-size: 13px;
-
             margin-bottom: 28px;
         }
 
@@ -159,140 +123,83 @@
 
         label {
             display: block;
-
             color: #d8dee7;
-
             font-size: 13px;
             font-weight: bold;
-
             margin-bottom: 8px;
         }
 
         input {
             width: 100%;
-
             padding: 14px;
-
             background: #0b111a;
-
             border: 1px solid var(--border);
-
             border-radius: 9px;
-
             color: white;
-
             outline: none;
-
             font-size: 14px;
         }
 
         input:focus {
             border-color: var(--orange);
-
-            box-shadow:
-                0 0 0 3px rgba(247,147,26,.08);
         }
 
         .login-btn {
             width: 100%;
-
             padding: 14px;
-
-            margin-top: 5px;
-
             border: none;
-
             border-radius: 9px;
-
             background: var(--orange);
-
             color: #111;
-
             font-size: 14px;
-
             font-weight: bold;
-
             cursor: pointer;
         }
 
-        .login-btn:hover {
-            opacity: .9;
+        .login-btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
         }
 
         .message {
             display: none;
-
             margin-top: 16px;
-
             padding: 12px;
-
             border-radius: 8px;
-
-            background: rgba(247,147,26,.08);
-
-            border: 1px solid rgba(247,147,26,.2);
-
-            color: #d9dee6;
-
             font-size: 12px;
-
             line-height: 1.5;
-
             text-align: center;
+        }
+
+        .error {
+            background: rgba(255,92,92,.08);
+            border: 1px solid rgba(255,92,92,.25);
+            color: var(--red);
         }
 
         .register {
             text-align: center;
-
             margin-top: 22px;
-
             color: var(--muted);
-
             font-size: 13px;
         }
 
         .register a {
             color: var(--orange);
-
             text-decoration: none;
-
             font-weight: bold;
-        }
-
-        .demo-note {
-            margin-top: 20px;
-
-            padding: 12px;
-
-            border-radius: 8px;
-
-            background: #0b111a;
-
-            border: 1px solid var(--border);
-
-            color: var(--muted);
-
-            font-size: 11px;
-
-            line-height: 1.5;
-
-            text-align: center;
         }
 
         footer {
             border-top: 1px solid var(--border);
-
             padding: 25px;
-
             text-align: center;
-
             color: var(--muted);
-
             font-size: 12px;
         }
 
         @media (max-width: 500px) {
-            .login-card {
+            .card {
                 padding: 25px 18px;
             }
         }
@@ -302,17 +209,11 @@
 <body>
 
 <header>
-
     <div class="nav">
 
         <a href="index.html" class="logo">
-
-            <div class="logo-icon">
-                ₿
-            </div>
-
+            <div class="logo-icon">₿</div>
             BTC INVEST
-
         </a>
 
         <a href="index.html" class="home">
@@ -320,24 +221,19 @@
         </a>
 
     </div>
-
 </header>
 
 
 <main>
 
-    <div class="login-card">
+    <div class="card">
 
-        <div class="icon">
-            ₿
-        </div>
+        <div class="icon">₿</div>
 
-        <h1>
-            Welcome Back
-        </h1>
+        <h1>Welcome Back</h1>
 
         <p class="subtitle">
-            Sign in to access your BTC Invest dashboard.
+            Sign in to your BTC Invest account.
         </p>
 
 
@@ -378,6 +274,7 @@
             <button
                 type="submit"
                 class="login-btn"
+                id="loginBtn"
             >
                 Login
             </button>
@@ -385,12 +282,7 @@
         </form>
 
 
-        <div
-            class="message"
-            id="message"
-        >
-            Login submitted. Opening your dashboard...
-        </div>
+        <div id="errorMessage" class="message error"></div>
 
 
         <div class="register">
@@ -403,52 +295,109 @@
 
         </div>
 
-
-        <div class="demo-note">
-
-            Demo front-end only. This form does not store or
-            authenticate passwords. A real login system requires
-            a secure backend and password hashing.
-
-        </div>
-
     </div>
 
 </main>
 
 
 <footer>
-
     © 2026 BTC INVEST. All rights reserved.
-
 </footer>
 
 
+<!-- Supabase -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 
-    document
-        .getElementById("loginForm")
-        .addEventListener("submit", function(event) {
+    const SUPABASE_URL =
+        "https://rikpsvmhtusupnuhgrsf.supabase.co";
 
-            event.preventDefault();
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_7O3mA4KtXSRR6skAKWkgxQ_2c-8BDug";
 
-            const message =
-                document.getElementById("message");
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
+        );
 
-            message.style.display = "block";
 
-            /*
-             * Demo navigation only.
-             * No password or account information is stored.
-             */
+    const form =
+        document.getElementById("loginForm");
 
-            setTimeout(function() {
+    const button =
+        document.getElementById("loginBtn");
 
-                window.location.href = "dashboard.html";
+    const errorMessage =
+        document.getElementById("errorMessage");
 
-            }, 800);
 
-        });
+    function showError(message) {
+
+        errorMessage.textContent = message;
+
+        errorMessage.style.display = "block";
+    }
+
+
+    form.addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        errorMessage.style.display = "none";
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+
+        button.disabled = true;
+
+        button.textContent = "Signing in...";
+
+
+        try {
+
+            const { data, error } =
+                await supabaseClient.auth.signInWithPassword({
+
+                    email: email,
+
+                    password: password
+
+                });
+
+
+            if (error) {
+                throw error;
+            }
+
+
+            window.location.href = "dashboard.html";
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            showError(
+                error.message ||
+                "Login failed. Please check your email and password."
+            );
+
+        } finally {
+
+            button.disabled = false;
+
+            button.textContent = "Login";
+
+        }
+
+    });
 
 </script>
 
