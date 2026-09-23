@@ -7,6 +7,7 @@
 <title>Dashboard | BTC Invest</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -30,6 +31,8 @@ body{
     min-height:100vh;
 }
 
+/* HEADER */
+
 header{
     border-bottom:1px solid var(--border);
     background:rgba(7,11,18,.97);
@@ -40,6 +43,7 @@ header{
     min-height:72px;
     margin:auto;
     padding:0 20px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -49,8 +53,10 @@ header{
     display:flex;
     align-items:center;
     gap:10px;
+
     color:white;
     text-decoration:none;
+
     font-size:21px;
     font-weight:bold;
 }
@@ -58,12 +64,15 @@ header{
 .logo-icon{
     width:39px;
     height:39px;
+
     border-radius:50%;
     background:var(--orange);
     color:#111;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     font-size:23px;
     font-weight:bold;
 }
@@ -82,18 +91,26 @@ header{
 .logout{
     background:none;
     border:0;
+
     color:var(--orange);
     cursor:pointer;
+
     font-size:14px;
 }
+
+/* LAYOUT */
 
 .layout{
     max-width:1250px;
     margin:auto;
+
     display:grid;
     grid-template-columns:220px 1fr;
+
     min-height:calc(100vh - 72px);
 }
+
+/* SIDEBAR */
 
 aside{
     border-right:1px solid var(--border);
@@ -102,20 +119,29 @@ aside{
 
 .menu-title{
     color:#687586;
+
     font-size:11px;
     font-weight:bold;
+
     text-transform:uppercase;
+
     padding:0 12px;
     margin-bottom:10px;
 }
 
 .menu a{
     display:block;
+
     padding:12px;
+
     border-radius:8px;
+
     color:#b9c3d0;
+
     text-decoration:none;
+
     font-size:14px;
+
     margin-bottom:5px;
 }
 
@@ -124,6 +150,8 @@ aside{
     background:rgba(247,147,26,.1);
     color:var(--orange);
 }
+
+/* MAIN */
 
 main{
     padding:35px 25px 60px;
@@ -143,11 +171,43 @@ main{
     font-size:14px;
 }
 
+/* ERROR */
+
+.error-box{
+    display:none;
+
+    margin-bottom:20px;
+
+    padding:14px;
+
+    border-radius:9px;
+
+    background:rgba(255,92,92,.08);
+
+    border:1px solid rgba(255,92,92,.25);
+
+    color:var(--red);
+
+    font-size:13px;
+
+    line-height:1.5;
+}
+
+/* BALANCE */
+
 .balance-card{
-    background:linear-gradient(135deg,#151f2c,#0d141e);
+    background:linear-gradient(
+        135deg,
+        #151f2c,
+        #0d141e
+    );
+
     border:1px solid var(--border);
+
     border-radius:16px;
+
     padding:28px;
+
     margin-bottom:20px;
 }
 
@@ -158,8 +218,12 @@ main{
 
 .balance{
     font-size:42px;
+
     font-weight:bold;
-    margin:5px 0;
+
+    margin:7px 0;
+
+    color:white;
 }
 
 .btc-balance{
@@ -170,15 +234,23 @@ main{
 .balance-actions{
     display:flex;
     gap:10px;
+
     margin-top:22px;
 }
 
+/* BUTTONS */
+
 .btn{
     display:inline-block;
+
     padding:11px 18px;
+
     border-radius:8px;
+
     text-decoration:none;
+
     font-size:13px;
+
     font-weight:bold;
 }
 
@@ -189,21 +261,32 @@ main{
 
 .btn-dark{
     background:#151e2b;
+
     color:white;
+
     border:1px solid var(--border);
 }
 
+/* STATS */
+
 .stats{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+
+    grid-template-columns:
+    repeat(4,1fr);
+
     gap:15px;
+
     margin-bottom:25px;
 }
 
 .stat{
     background:var(--card);
+
     border:1px solid var(--border);
+
     border-radius:12px;
+
     padding:22px;
 }
 
@@ -213,8 +296,10 @@ main{
 }
 
 .stat-value{
-    font-size:23px;
+    font-size:20px;
+
     font-weight:bold;
+
     margin-top:7px;
 }
 
@@ -226,34 +311,58 @@ main{
     color:var(--orange);
 }
 
+.red{
+    color:var(--red);
+}
+
+/* CONTENT */
+
 .content-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
+
+    grid-template-columns:
+    1fr 1fr;
+
     gap:20px;
 }
 
 .card{
     background:var(--card);
+
     border:1px solid var(--border);
+
     border-radius:14px;
+
     padding:25px;
 }
 
 .card h2{
     font-size:18px;
+
     margin-bottom:20px;
 }
 
+/* INVESTMENT */
+
 .plan-box{
     background:#0b111a;
+
     border:1px solid var(--border);
+
     border-radius:10px;
+
     padding:18px;
 }
 
 .plan-top{
     display:flex;
+
     justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
     margin-bottom:15px;
 }
 
@@ -268,10 +377,17 @@ main{
 
 .plan-row{
     display:flex;
+
     justify-content:space-between;
+
+    gap:15px;
+
     color:var(--muted);
+
     font-size:13px;
+
     padding:9px 0;
+
     border-bottom:1px solid #19222e;
 }
 
@@ -281,29 +397,54 @@ main{
 
 .plan-row strong{
     color:white;
+
+    text-align:right;
 }
+
+/* TRANSACTIONS */
 
 .transaction{
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
+    gap:15px;
+
     padding:13px 0;
+
     border-bottom:1px solid #19222e;
+}
+
+.transaction:last-child{
+    border-bottom:none;
 }
 
 .transaction-left{
     display:flex;
+
     align-items:center;
+
     gap:10px;
+
+    min-width:0;
 }
 
 .transaction-icon{
     width:35px;
     height:35px;
+
+    min-width:35px;
+
     border-radius:50%;
+
     background:rgba(247,147,26,.1);
+
     color:var(--orange);
+
     display:flex;
+
     align-items:center;
     justify-content:center;
 }
@@ -314,34 +455,74 @@ main{
 
 .transaction-date{
     color:var(--muted);
+
     font-size:11px;
+
     margin-top:3px;
 }
 
 .transaction-amount{
-    color:var(--green);
     font-size:13px;
+
     font-weight:bold;
+
+    text-align:right;
+
+    white-space:nowrap;
 }
+
+.approved{
+    color:var(--green);
+}
+
+.pending{
+    color:var(--orange);
+}
+
+.rejected{
+    color:var(--red);
+}
+
+.empty{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* NOTICE */
 
 .notice{
     margin-top:20px;
+
     padding:15px;
+
     background:rgba(247,147,26,.05);
+
     border:1px solid rgba(247,147,26,.18);
+
     border-radius:10px;
+
     color:var(--muted);
+
     font-size:12px;
+
     line-height:1.5;
 }
 
+/* FOOTER */
+
 footer{
     text-align:center;
+
     border-top:1px solid var(--border);
+
     padding:25px;
+
     color:var(--muted);
+
     font-size:12px;
 }
+
+/* MOBILE */
 
 @media(max-width:950px){
 
@@ -354,7 +535,8 @@ footer{
     }
 
     .stats{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:
+        repeat(2,1fr);
     }
 
     .content-grid{
@@ -387,28 +569,45 @@ footer{
     .balance-actions .btn{
         text-align:center;
     }
+
 }
+
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
 <div class="nav">
 
 <a href="dashboard.html" class="logo">
-    <div class="logo-icon">₿</div>
-    BTC INVEST
+
+<div class="logo-icon">
+₿
+</div>
+
+BTC INVEST
+
 </a>
+
 
 <div class="nav-right">
 
-<span class="user-name" id="userName">
+<span
+class="user-name"
+id="userName"
+>
 Loading...
 </span>
 
-<button class="logout" id="logoutBtn">
+
+<button
+class="logout"
+id="logoutBtn"
+>
 Logout
 </button>
 
@@ -419,7 +618,9 @@ Logout
 </header>
 
 
+
 <div class="layout">
+
 
 <aside>
 
@@ -427,19 +628,26 @@ Logout
 Dashboard
 </div>
 
+
 <div class="menu">
 
-<a href="dashboard.html" class="active">
+<a
+href="dashboard.html"
+class="active"
+>
 Overview
 </a>
+
 
 <a href="plans.html">
 Investment Plans
 </a>
 
+
 <a href="deposit.html">
 Deposit BTC
 </a>
+
 
 <a href="withdraw.html">
 Withdraw
@@ -447,11 +655,14 @@ Withdraw
 
 </div>
 
+
 <br>
+
 
 <div class="menu-title">
 Account
 </div>
+
 
 <div class="menu">
 
@@ -459,9 +670,11 @@ Account
 Profile
 </a>
 
+
 <a href="#">
 Security
 </a>
+
 
 <a href="index.html">
 Back to Website
@@ -472,7 +685,16 @@ Back to Website
 </aside>
 
 
+
 <main>
+
+
+<div
+id="errorBox"
+class="error-box"
+></div>
+
+
 
 <div class="welcome">
 
@@ -481,13 +703,14 @@ Dashboard
 </h1>
 
 <p>
-Monitor your account and investment activity.
+Monitor your verified deposits and active investments.
 </p>
 
 </div>
 
 
-<!-- AVAILABLE BALANCE -->
+
+<!-- MAIN BALANCE -->
 
 <div class="balance-card">
 
@@ -495,21 +718,37 @@ Monitor your account and investment activity.
 Available Balance
 </div>
 
-<div class="balance" id="availableBalance">
-$0.00
-</div>
 
-<div class="btc-balance" id="btcBalance">
+<div
+class="balance"
+id="mainBalance"
+>
 0.00000000 BTC
 </div>
 
+
+<div
+class="btc-balance"
+id="mainBalanceInfo"
+>
+Available after active investments
+</div>
+
+
 <div class="balance-actions">
 
-<a href="deposit.html" class="btn btn-orange">
+<a
+href="deposit.html"
+class="btn btn-orange"
+>
 Deposit BTC
 </a>
 
-<a href="withdraw.html" class="btn btn-dark">
+
+<a
+href="withdraw.html"
+class="btn btn-dark"
+>
 Withdraw
 </a>
 
@@ -518,21 +757,27 @@ Withdraw
 </div>
 
 
-<!-- STAT CARDS -->
+
+<!-- STATISTICS -->
 
 <div class="stats">
+
 
 <div class="stat">
 
 <div class="stat-label">
-Total Deposited
+Approved Deposits
 </div>
 
-<div class="stat-value" id="totalDeposited">
-$0.00
+<div
+class="stat-value"
+id="approvedBTC"
+>
+0.00000000 BTC
 </div>
 
 </div>
+
 
 
 <div class="stat">
@@ -541,11 +786,15 @@ $0.00
 Active Investment
 </div>
 
-<div class="stat-value orange" id="activeInvestment">
-$0.00
+<div
+class="stat-value orange"
+id="activeBTC"
+>
+0.00000000 BTC
 </div>
 
 </div>
+
 
 
 <div class="stat">
@@ -554,11 +803,15 @@ $0.00
 Projected Value
 </div>
 
-<div class="stat-value green" id="projectedValue">
+<div
+class="stat-value green"
+id="projectedValue"
+>
 $0.00
 </div>
 
 </div>
+
 
 
 <div class="stat">
@@ -567,7 +820,7 @@ $0.00
 Account Status
 </div>
 
-<div class="stat-value green" id="accountStatus">
+<div class="stat-value green">
 Active
 </div>
 
@@ -576,7 +829,11 @@ Active
 </div>
 
 
+
+<!-- CONTENT -->
+
 <div class="content-grid">
+
 
 
 <!-- ACTIVE INVESTMENT -->
@@ -587,19 +844,29 @@ Active
 Active Investment
 </h2>
 
+
 <div class="plan-box">
+
 
 <div class="plan-top">
 
-<span class="plan-name" id="planName">
+<span
+class="plan-name"
+id="planName"
+>
 No Active Plan
 </span>
 
-<span class="status" id="planStatus">
+
+<span
+class="status"
+id="investmentStatus"
+>
 ● Ready
 </span>
 
 </div>
+
 
 
 <div class="plan-row">
@@ -608,11 +875,14 @@ No Active Plan
 Investment
 </span>
 
-<strong id="investmentAmount">
-$0.00
+<strong
+id="investmentAmount"
+>
+0.00000000 BTC
 </strong>
 
 </div>
+
 
 
 <div class="plan-row">
@@ -621,11 +891,14 @@ $0.00
 Cycle
 </span>
 
-<strong id="investmentCycle">
+<strong
+id="investmentCycle"
+>
 —
 </strong>
 
 </div>
+
 
 
 <div class="plan-row">
@@ -634,11 +907,14 @@ Cycle
 Projected Value
 </span>
 
-<strong id="investmentProjected">
+<strong
+id="investmentProjected"
+>
 —
 </strong>
 
 </div>
+
 
 
 <div class="plan-row">
@@ -647,11 +923,14 @@ Projected Value
 Projected Profit
 </span>
 
-<strong id="investmentProfit">
+<strong
+id="investmentProfit"
+>
 —
 </strong>
 
 </div>
+
 
 
 <div class="plan-row">
@@ -660,21 +939,31 @@ Projected Profit
 Status
 </span>
 
-<strong class="green" id="investmentStatus">
-No Active Investment
+<strong
+id="investmentState"
+class="green"
+>
+Waiting for Investment
 </strong>
 
 </div>
 
+
 </div>
+
 
 <br>
 
-<a href="plans.html" class="btn btn-orange">
+
+<a
+href="plans.html"
+class="btn btn-orange"
+>
 View Plans
 </a>
 
 </div>
+
 
 
 <!-- TRANSACTIONS -->
@@ -685,39 +974,37 @@ View Plans
 Recent Transactions
 </h2>
 
-<div class="transaction">
 
-<div class="transaction-left">
+<div id="transactions">
 
-<div class="transaction-icon">
-↓
-</div>
-
-<div>
-
-<div class="transaction-name" id="transactionName">
-No investment activity
-</div>
-
-<div class="transaction-date" id="transactionDate">
-Investment activity will appear here
+<div class="empty">
+Loading transactions...
 </div>
 
 </div>
 
-</div>
-
-<div class="transaction-amount" id="transactionAmount">
-—
-</div>
-
-</div>
 
 <div class="notice">
-Investment and account activity will be displayed here.
+Only approved deposits are included in your available balance.
 </div>
 
 </div>
+
+</div>
+
+
+
+<div class="notice">
+
+<strong>
+Balance calculation:
+</strong>
+
+Approved deposits minus BTC currently allocated to active investments.
+
+<br><br>
+
+Projected investment values are displayed separately and are not added to the available BTC balance.
 
 </div>
 
@@ -727,6 +1014,7 @@ Investment and account activity will be displayed here.
 </div>
 
 
+
 <footer>
 
 © 2026 BTC INVEST. All rights reserved.
@@ -734,15 +1022,23 @@ Investment and account activity will be displayed here.
 </footer>
 
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <script>
+
+/* ==========================================
+   SUPABASE CONFIG
+========================================== */
 
 const SUPABASE_URL =
 "https://rikpsvmhtusupnuhgrsf.supabase.co";
 
+
 const SUPABASE_PUBLISHABLE_KEY =
 "sb_publishable_7O3mA4KtXSRR6skAKWkgxQ_2c-8BDug";
+
 
 const supabaseClient =
 window.supabase.createClient(
@@ -751,26 +1047,99 @@ window.supabase.createClient(
 );
 
 
-/* =========================================
-   AUTHENTICATION
-========================================= */
+
+/* ==========================================
+   CURRENT USER
+========================================== */
+
+let currentUser = null;
+
+
+
+/* ==========================================
+   SHOW ERROR
+========================================== */
+
+function showError(message){
+
+    const box =
+    document.getElementById(
+        "errorBox"
+    );
+
+    box.textContent =
+    message;
+
+    box.style.display =
+    "block";
+}
+
+
+
+/* ==========================================
+   BTC FORMAT
+========================================== */
+
+function formatBTC(value){
+
+    const number =
+    Number(value) || 0;
+
+    return (
+        number.toFixed(8)
+        + " BTC"
+    );
+}
+
+
+
+/* ==========================================
+   USD FORMAT
+========================================== */
+
+function formatUSD(value){
+
+    const number =
+    Number(value) || 0;
+
+    return "$" +
+    number.toLocaleString(
+        undefined,
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
+}
+
+
+
+/* ==========================================
+   CHECK LOGIN
+========================================== */
 
 async function checkUser(){
 
     const {
-        data:{session},
+        data:{
+            session
+        },
         error
-    } = await supabaseClient.auth.getSession();
+    } =
+    await supabaseClient
+    .auth
+    .getSession();
 
 
     if(error){
 
-        console.error(
-            "Authentication error:",
-            error
+        console.error(error);
+
+        window.location.replace(
+            "login.html"
         );
 
-        return;
+        return false;
     }
 
 
@@ -780,82 +1149,703 @@ async function checkUser(){
             "login.html"
         );
 
+        return false;
+    }
+
+
+    currentUser =
+    session.user;
+
+
+    const name =
+    currentUser
+    .user_metadata
+    ?.full_name
+    ||
+    currentUser.email
+    ||
+    "Investor";
+
+
+    document
+    .getElementById(
+        "userName"
+    )
+    .textContent =
+    "Welcome, " + name;
+
+
+    document
+    .getElementById(
+        "welcomeTitle"
+    )
+    .textContent =
+    "Welcome, " + name;
+
+
+    return true;
+}
+
+
+
+/* ==========================================
+   LOAD ACCOUNT
+========================================== */
+
+async function loadAccount(){
+
+
+    /* --------------------------------------
+       GET DEPOSITS
+    -------------------------------------- */
+
+    const {
+        data:deposits,
+        error:depositError
+    } =
+    await supabaseClient
+    .from("deposits")
+    .select(
+        "amount,status,created_at,tx_hash"
+    )
+    .eq(
+        "user_id",
+        currentUser.id
+    )
+    .order(
+        "created_at",
+        {
+            ascending:false
+        }
+    );
+
+
+    if(depositError){
+
+        console.error(
+            "Deposit error:",
+            depositError
+        );
+
+        showError(
+            "Unable to load deposit information."
+        );
+
         return;
     }
 
 
-    const user =
-        session.user;
+
+    /* --------------------------------------
+       GET INVESTMENTS
+    -------------------------------------- */
+
+    const {
+        data:investments,
+        error:investmentError
+    } =
+    await supabaseClient
+    .from("investments")
+    .select(
+        "id,plan_name,amount_btc,status,projected_value,projected_profit,start_date,end_date,created_at"
+    )
+    .eq(
+        "user_id",
+        currentUser.id
+    )
+    .order(
+        "created_at",
+        {
+            ascending:false
+        }
+    );
 
 
-    const name =
-        user.user_metadata?.full_name ||
-        user.email ||
-        "Investor";
+    if(investmentError){
+
+        console.error(
+            "Investment error:",
+            investmentError
+        );
+
+        showError(
+            "Unable to load investment information. Check the investments table and its Row Level Security policy."
+        );
+
+        return;
+    }
+
+
+
+    /* --------------------------------------
+       APPROVED DEPOSITS
+    -------------------------------------- */
+
+    let approvedBTC = 0;
+
+
+    deposits.forEach(
+    function(deposit){
+
+        const status =
+        String(
+            deposit.status || ""
+        ).toLowerCase();
+
+
+        if(
+            status === "approved"
+        ){
+
+            approvedBTC +=
+            Number(
+                deposit.amount
+            ) || 0;
+
+        }
+
+    });
+
+
+
+    /* --------------------------------------
+       ACTIVE INVESTMENTS
+    -------------------------------------- */
+
+    let activeBTC = 0;
+
+    const activeInvestments = [];
+
+
+    investments.forEach(
+    function(investment){
+
+        const status =
+        String(
+            investment.status || ""
+        ).toLowerCase();
+
+
+        if(
+            status === "active"
+        ){
+
+            activeBTC +=
+            Number(
+                investment.amount_btc
+            ) || 0;
+
+
+            activeInvestments.push(
+                investment
+            );
+
+        }
+
+    });
+
+
+
+    /* --------------------------------------
+       AVAILABLE BALANCE
+    -------------------------------------- */
+
+    const availableBTC =
+    Math.max(
+        0,
+        approvedBTC - activeBTC
+    );
+
+
+
+    /* --------------------------------------
+       MAIN BALANCE
+    -------------------------------------- */
+
+    document
+    .getElementById(
+        "mainBalance"
+    )
+    .textContent =
+    formatBTC(
+        availableBTC
+    );
 
 
     document
-    .getElementById("userName")
+    .getElementById(
+        "mainBalanceInfo"
+    )
     .textContent =
-        "Welcome, " + name;
+    "Available after active investments";
+
+
+
+    /* --------------------------------------
+       STATISTICS
+    -------------------------------------- */
+
+    document
+    .getElementById(
+        "approvedBTC"
+    )
+    .textContent =
+    formatBTC(
+        approvedBTC
+    );
 
 
     document
-    .getElementById("welcomeTitle")
+    .getElementById(
+        "activeBTC"
+    )
     .textContent =
-        "Welcome, " + name;
+    formatBTC(
+        activeBTC
+    );
+
+
+
+    /* --------------------------------------
+       NO ACTIVE INVESTMENT
+    -------------------------------------- */
+
+    if(
+        activeInvestments.length === 0
+    ){
+
+        document
+        .getElementById(
+            "planName"
+        )
+        .textContent =
+        "No Active Plan";
+
+
+        document
+        .getElementById(
+            "investmentStatus"
+        )
+        .textContent =
+        "● Ready";
+
+
+        document
+        .getElementById(
+            "investmentAmount"
+        )
+        .textContent =
+        "0.00000000 BTC";
+
+
+        document
+        .getElementById(
+            "investmentCycle"
+        )
+        .textContent =
+        "—";
+
+
+        document
+        .getElementById(
+            "investmentProjected"
+        )
+        .textContent =
+        "—";
+
+
+        document
+        .getElementById(
+            "investmentProfit"
+        )
+        .textContent =
+        "—";
+
+
+        document
+        .getElementById(
+            "investmentState"
+        )
+        .textContent =
+        "Waiting for Investment";
+
+
+        document
+        .getElementById(
+            "projectedValue"
+        )
+        .textContent =
+        "$0.00";
+
+    }
+
+
+    /* --------------------------------------
+       ACTIVE INVESTMENT
+    -------------------------------------- */
+
+    else{
+
+        const investment =
+        activeInvestments[0];
+
+
+        const amount =
+        Number(
+            investment.amount_btc
+        ) || 0;
+
+
+        const projectedValue =
+        Number(
+            investment.projected_value
+        ) || 0;
+
+
+        const projectedProfit =
+        Number(
+            investment.projected_profit
+        ) || 0;
+
+
+
+        document
+        .getElementById(
+            "planName"
+        )
+        .textContent =
+        investment.plan_name
+        ||
+        "Active Plan";
+
+
+        document
+        .getElementById(
+            "investmentStatus"
+        )
+        .textContent =
+        "● Active";
+
+
+        document
+        .getElementById(
+            "investmentAmount"
+        )
+        .textContent =
+        formatBTC(
+            amount
+        );
+
+
+
+        /* CYCLE */
+
+        let cycle =
+        "—";
+
+
+        if(
+            investment.start_date
+            &&
+            investment.end_date
+        ){
+
+            const start =
+            new Date(
+                investment.start_date
+            );
+
+            const end =
+            new Date(
+                investment.end_date
+            );
+
+
+            const difference =
+            end.getTime()
+            -
+            start.getTime();
+
+
+            const days =
+            Math.round(
+                difference
+                /
+                (
+                    1000 *
+                    60 *
+                    60 *
+                    24
+                )
+            );
+
+
+            if(days > 0){
+
+                cycle =
+                days + " Days";
+
+            }
+
+        }
+
+
+        document
+        .getElementById(
+            "investmentCycle"
+        )
+        .textContent =
+        cycle;
+
+
+
+        /* PROJECTED VALUE */
+
+        document
+        .getElementById(
+            "investmentProjected"
+        )
+        .textContent =
+        formatUSD(
+            projectedValue
+        );
+
+
+        document
+        .getElementById(
+            "investmentProfit"
+        )
+        .textContent =
+        formatUSD(
+            projectedProfit
+        );
+
+
+        document
+        .getElementById(
+            "investmentState"
+        )
+        .textContent =
+        "Active";
+
+
+        document
+        .getElementById(
+            "projectedValue"
+        )
+        .textContent =
+        formatUSD(
+            projectedValue
+        );
+
+    }
+
+
+
+    /* --------------------------------------
+       TRANSACTIONS
+    -------------------------------------- */
+
+    loadTransactions(
+        deposits
+    );
 
 }
 
 
-/* =========================================
-   LOGOUT
-========================================= */
 
-document
-.getElementById("logoutBtn")
-.addEventListener(
-    "click",
-    async function(){
+/* ==========================================
+   TRANSACTIONS
+========================================== */
 
-        this.disabled = true;
+function loadTransactions(
+    deposits
+){
 
-        this.textContent =
-            "Logging out...";
-
-
-        const {error} =
-            await supabaseClient
-            .auth
-            .signOut();
+    const container =
+    document.getElementById(
+        "transactions"
+    );
 
 
-        if(error){
+    if(
+        !deposits ||
+        deposits.length === 0
+    ){
 
-            console.error(error);
+        container.innerHTML = `
+            <div class="empty">
+                No transactions yet.
+            </div>
+        `;
 
-            this.disabled = false;
-
-            this.textContent =
-                "Logout";
-
-            return;
-        }
+        return;
+    }
 
 
-        window.location.replace(
-            "login.html"
+    container.innerHTML = "";
+
+
+    deposits
+    .slice(0,5)
+    .forEach(
+    function(deposit){
+
+        const amount =
+        Number(
+            deposit.amount
+        ) || 0;
+
+
+        const status =
+        String(
+            deposit.status ||
+            "pending"
+        ).toLowerCase();
+
+
+        const date =
+        deposit.created_at
+        ?
+        new Date(
+            deposit.created_at
+        ).toLocaleString()
+        :
+        "Unknown date";
+
+
+        const transaction =
+        document.createElement(
+            "div"
         );
 
+
+        transaction.className =
+        "transaction";
+
+
+        transaction.innerHTML = `
+
+            <div class="transaction-left">
+
+                <div class="transaction-icon">
+                    ↓
+                </div>
+
+                <div>
+
+                    <div class="transaction-name">
+                        BTC Deposit
+                    </div>
+
+                    <div class="transaction-date">
+                        ${date}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <div class="transaction-amount ${status}">
+                    ${formatBTC(amount)}
+                </div>
+
+                <div
+                    class="${status}"
+                    style="
+                        font-size:10px;
+                        text-align:right;
+                        margin-top:3px;
+                        text-transform:uppercase;
+                    "
+                >
+                    ${status}
+                </div>
+
+            </div>
+        `;
+
+
+        container.appendChild(
+            transaction
+        );
+
+    });
+
+}
+
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+document
+.getElementById(
+    "logoutBtn"
+)
+.addEventListener(
+"click",
+async function(){
+
+    this.disabled =
+    true;
+
+    this.textContent =
+    "Logging out...";
+
+
+    const {
+        error
+    } =
+    await supabaseClient
+    .auth
+    .signOut();
+
+
+    if(error){
+
+        console.error(error);
+
+        this.disabled =
+        false;
+
+        this.textContent =
+        "Logout";
+
+        return;
     }
-);
 
 
-/* =========================================
+    window.location.replace(
+        "login.html"
+    );
+
+});
+
+
+
+/* ==========================================
    START
-========================================= */
+========================================== */
 
-checkUser();
+(async function(){
+
+    const loggedIn =
+    await checkUser();
+
+
+    if(!loggedIn){
+        return;
+    }
+
+
+    await loadAccount();
+
+})();
 
 </script>
 
